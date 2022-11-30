@@ -14,8 +14,10 @@ class MainPage extends StatelessWidget {
           const Flexible(child: Announcements()),
           Align(
             alignment: Alignment.bottomCenter,
-            child: TextButton(
-                child: const Text('Start Drawing!'), onPressed: () {}),
+            child: TextButton.icon(
+                icon: const Icon(Icons.palette),
+                label: const Text('Start Drawing!'),
+                onPressed: () {}),
           )
         ]));
   }
