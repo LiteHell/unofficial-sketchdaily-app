@@ -11,7 +11,7 @@ class MainPage extends StatelessWidget {
           title: const Text('SketchDaily reference'),
         ),
         body: Column(children: [
-          Flexible(child: const Announcements()),
+          const Flexible(child: Announcements()),
           Align(
             alignment: Alignment.bottomCenter,
             child: TextButton(

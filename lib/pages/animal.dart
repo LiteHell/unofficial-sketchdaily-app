@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:sketchdaily/sketchdaily_api/sketchdaily_api.dart';
 
 class AnimalPage extends StatefulWidget {
@@ -16,7 +14,7 @@ class _AnimalPageState extends State<AnimalPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Animal')),
-      body: Text('Hello, World!'),
+      body: const Text('Hello, World!'),
     );
   }
 }

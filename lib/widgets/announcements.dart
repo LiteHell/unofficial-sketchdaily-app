@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:sketchdaily/app_preferences.dart';
@@ -72,7 +70,7 @@ class _AnnouncementsState extends State<Announcements> {
         HtmlWidget(news.content),
         Text('Wrote at ${news.date.toString()}',
             textScaleFactor: 0.55,
-            style: TextStyle(color: Color.fromARGB(255, 96, 96, 96)))
+            style: const TextStyle(color: Color.fromARGB(255, 96, 96, 96)))
       ]),
     );
   }
