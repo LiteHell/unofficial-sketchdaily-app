@@ -1,15 +1,17 @@
 import 'package:sketchdaily/sketchdaily_api/animal/animal_option.dart';
+import 'package:sketchdaily/sketchdaily_api/image_uri_suppliable.dart';
 import 'package:sketchdaily/sketchdaily_api/person.dart';
 import 'package:sketchdaily/sketchdaily_api/request/api_post_request.dart';
 import 'package:sketchdaily/sketchdaily_api/view_angle.dart';
 
-class Animal {
+class Animal extends ImageUriSuppliable {
   final String id;
   final String filePath;
   final Person photorgapher;
   final String uploader;
   final DateTime uploadedAt;
   final AnimalOption classification;
+  @override
   Uri get uri => Uri.http('reference.sketchdaily.net:4000', filePath);
 
   Animal._privateConstructor(
