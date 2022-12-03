@@ -159,7 +159,9 @@ class _PicturePlayerState extends State<PicturePlayer> {
         Flexible(
             flex: 1,
             child: index < 0
-                ? const Center(child: CircularProgressIndicator())
+                ? (noMoreImages
+                    ? const Center(child: Text('no more images'))
+                    : const Center(child: CircularProgressIndicator()))
                 : Image.network(
                     images[index].uri.toString(),
                     fit: BoxFit.contain,
