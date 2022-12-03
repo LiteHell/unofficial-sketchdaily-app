@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sketchdaily/pages/drawing_options.dart';
 import 'package:sketchdaily/widgets/announcements.dart';
 
 class MainPage extends StatelessWidget {
@@ -14,10 +15,13 @@ class MainPage extends StatelessWidget {
           const Flexible(child: Announcements()),
           Align(
             alignment: Alignment.bottomCenter,
-            child: TextButton.icon(
+            child: ElevatedButton.icon(
                 icon: const Icon(Icons.palette),
                 label: const Text('Start Drawing!'),
-                onPressed: () {}),
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const DrawingOptions()));
+                }),
           )
         ]));
   }
