@@ -5,7 +5,7 @@ class SketchDailyImage {
   final String id;
   final DateTime uploadedAt;
   final String uploader;
-  final Person photographer;
+  final Person? photographer;
   Uri get uri => Uri.http('reference.sketchdaily.net:4000', filePath);
 
   SketchDailyImage(

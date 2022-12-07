@@ -96,7 +96,7 @@ class Animal extends SketchDailyImage {
       return null;
     }
 
-    Person photographer = Person.fromJsonObject(response['photographer']);
+    Person? photographer = Person.fromJsonObject(response['photographer']);
 
     return Animal._privateConstructor(
         photographer: photographer,

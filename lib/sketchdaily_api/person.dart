@@ -4,7 +4,11 @@ class Person {
 
   Person(this.name, this.webpage);
 
-  static Person fromJsonObject(dynamic object) {
-    return Person(object['name'], object['webpage']);
+  static Person? fromJsonObject(dynamic object) {
+    if (object['name'] != null && object['webpage'] != null) {
+      return Person(object['name'], object['webpage']);
+    } else {
+      return null;
+    }
   }
 }
