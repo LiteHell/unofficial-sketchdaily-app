@@ -1,26 +1,27 @@
 import 'package:sketchdaily/sketchdaily_api/animal/animal_option.dart';
-import 'package:sketchdaily/sketchdaily_api/image_uri_suppliable.dart';
+import 'package:sketchdaily/sketchdaily_api/sketchdaily_image.dart';
 import 'package:sketchdaily/sketchdaily_api/person.dart';
 import 'package:sketchdaily/sketchdaily_api/request/api_post_request.dart';
 import 'package:sketchdaily/sketchdaily_api/view_angle.dart';
 
-class Animal extends ImageUriSuppliable {
-  final String id;
-  final String filePath;
-  final Person photorgapher;
-  final String uploader;
-  final DateTime uploadedAt;
+class Animal extends SketchDailyImage {
   final AnimalOption classification;
   @override
   Uri get uri => Uri.http('reference.sketchdaily.net:4000', filePath);
 
   Animal._privateConstructor(
-      {required this.id,
-      required this.filePath,
-      required this.photorgapher,
-      required this.uploadedAt,
-      required this.uploader,
-      required this.classification});
+      {required id,
+      required filePath,
+      required photographer,
+      required uploadedAt,
+      required uploader,
+      required this.classification})
+      : super(
+            id: id,
+            filePath: filePath,
+            uploader: uploader,
+            uploadedAt: uploadedAt,
+            photographer: photographer);
 
   static AnimalOption createClassification(dynamic object) {
     return AnimalOption(
@@ -99,7 +100,7 @@ class Animal extends ImageUriSuppliable {
         response['photographer']['name'], response['photographer']['webpage']);
 
     return Animal._privateConstructor(
-        photorgapher: photographer,
+        photographer: photographer,
         uploader: response['uploadedBy'],
         uploadedAt: DateTime.parse(response['uploadDate']),
         filePath: response['file'],

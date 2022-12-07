@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:sketchdaily/sketchdaily_api/image_uri_suppliable.dart';
+import 'package:sketchdaily/sketchdaily_api/sketchdaily_image.dart';
 
 class PicturePlayer extends StatefulWidget {
   final Duration imageDuration;
-  final Future<ImageUriSuppliable?> Function() getNextImage;
+  final Future<SketchDailyImage?> Function() getNextImage;
   final bool infiniteDuration;
   const PicturePlayer({
     super.key,
@@ -19,7 +19,7 @@ class PicturePlayer extends StatefulWidget {
 }
 
 class _PicturePlayerState extends State<PicturePlayer> {
-  List<ImageUriSuppliable> images = [];
+  List<SketchDailyImage> images = [];
   int index = -1;
   Timer? timer;
   Stopwatch stopwatch = Stopwatch();

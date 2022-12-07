@@ -3,7 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:sketchdaily/sketchdaily_api/animal/animal.dart';
 import 'package:sketchdaily/sketchdaily_api/animal/animal_option.dart';
-import 'package:sketchdaily/sketchdaily_api/image_uri_suppliable.dart';
+import 'package:sketchdaily/sketchdaily_api/sketchdaily_image.dart';
 import 'package:sketchdaily/widgets/picture_player.dart';
 
 class AnimalPicturePage extends StatefulWidget {
@@ -23,7 +23,7 @@ class AnimalPicturePage extends StatefulWidget {
 class _AnimalPicturePageState extends State<AnimalPicturePage> {
   List<String> imageIds = [];
 
-  Future<ImageUriSuppliable?> getNextImage() async {
+  Future<SketchDailyImage?> getNextImage() async {
     final animal = await Animal.getAnimal(widget.options, imageIds);
 
     if (animal != null) {

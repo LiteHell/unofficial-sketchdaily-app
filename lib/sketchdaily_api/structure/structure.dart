@@ -1,25 +1,23 @@
-import 'package:sketchdaily/sketchdaily_api/image_uri_suppliable.dart';
+import 'package:sketchdaily/sketchdaily_api/sketchdaily_image.dart';
 import 'package:sketchdaily/sketchdaily_api/person.dart';
 import 'package:sketchdaily/sketchdaily_api/request/api_post_request.dart';
 
-class Structure extends ImageUriSuppliable {
-  final String id;
-  final String filePath;
-  final DateTime uploadedAt;
-  final String uploader;
+class Structure extends SketchDailyImage {
   final StrctureType structureType;
-  final Person photographer;
-
-  @override
-  Uri get uri => Uri.http('reference.sketchdaily.net:4000', filePath);
 
   Structure._privateConstructor(
-      {required this.id,
-      required this.filePath,
-      required this.photographer,
+      {required filePath,
+      required photographer,
       required this.structureType,
-      required this.uploadedAt,
-      required this.uploader});
+      required uploadedAt,
+      required uploader,
+      required id})
+      : super(
+            filePath: filePath,
+            photographer: photographer,
+            uploadedAt: uploadedAt,
+            uploader: uploader,
+            id: id);
 
   static Future<Structure?> getStructure(
       {StrctureType? type, List<String> excludeIds = const []}) async {
