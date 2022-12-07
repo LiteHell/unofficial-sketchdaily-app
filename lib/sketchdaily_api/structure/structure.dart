@@ -34,8 +34,7 @@ class Structure extends SketchDailyImage {
       return null;
     }
 
-    final photographer = Person(
-        response['photographer']['name'], response['photographer']['webpage']);
+    final photographer = Person.fromJsonObject(response['photographer']);
 
     return Structure._privateConstructor(
         id: response['id'],
