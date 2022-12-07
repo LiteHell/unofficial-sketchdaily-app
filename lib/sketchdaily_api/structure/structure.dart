@@ -1,3 +1,4 @@
+import 'package:sketchdaily/first_letter_case_sensitive_extension.dart';
 import 'package:sketchdaily/sketchdaily_api/sketchdaily_image.dart';
 import 'package:sketchdaily/sketchdaily_api/person.dart';
 import 'package:sketchdaily/sketchdaily_api/request/api_post_request.dart';
@@ -24,8 +25,7 @@ class Structure extends SketchDailyImage {
     Map<String, String> parameters = {};
 
     if (type != null) {
-      parameters['StructureType'] =
-          type.name.toUpperCase().substring(0, 1) + type.name.substring(1);
+      parameters['StructureType'] = type.name.toFirstLetterUpperCase();
     }
     dynamic response = await postJsonSketchDailyApi(
         '/api/Structures/Next', excludeIds, parameters);
