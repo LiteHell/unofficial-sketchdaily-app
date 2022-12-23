@@ -14,6 +14,10 @@ import 'package:sketchdaily/sketchdaily_api/sketchdaily_api.dart';
 
 void main() {
   group('BodyPart', () {
+    test('Can count bodyParts without any options', () async {
+      final count = await BodyPart.count(const BodyPartOption());
+      expect(count, greaterThan(0));
+    });
     test('Get bodyPart without any options', () async {
       BodyPart bodyPart = (await BodyPart.getFullBody())!;
       expect(bodyPart, isNotNull);

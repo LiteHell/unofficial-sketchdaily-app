@@ -11,6 +11,10 @@ import 'package:sketchdaily/sketchdaily_api/sketchdaily_api.dart';
 
 void main() {
   group('Animal', () {
+    test('Can count animal without any options', () async {
+      final count = await Animal.count(AnimalOption());
+      expect(count, greaterThan(0));
+    });
     test('Get animal without any options', () async {
       Animal animal = (await Animal.getAnimal(AnimalOption()))!;
       final image = await http.get(animal.uri);

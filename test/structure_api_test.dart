@@ -11,6 +11,10 @@ import 'package:sketchdaily/sketchdaily_api/structure/structure.dart';
 
 void main() {
   group('Animal', () {
+    test('Can count structures without any options', () async {
+      final count = await Structure.count(null);
+      expect(count, greaterThan(0));
+    });
     test('Get structure without any options', () async {
       Structure structure = (await Structure.getStructure())!;
       expect(structure, isNotNull);

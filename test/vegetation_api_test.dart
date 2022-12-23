@@ -12,6 +12,10 @@ import 'package:sketchdaily/sketchdaily_api/vegetation/vegetation_option.dart';
 
 void main() {
   group('Animal', () {
+    test('Can count vegetations without any options', () async {
+      final count = await Vegetation.count(const VegetationOption());
+      expect(count, greaterThan(0));
+    });
     test('Get vegetation without any options', () async {
       Vegetation vegetation = (await Vegetation.getVegetation())!;
       expect(vegetation, isNotNull);

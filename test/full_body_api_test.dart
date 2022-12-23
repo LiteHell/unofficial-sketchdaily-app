@@ -14,6 +14,10 @@ import 'package:sketchdaily/sketchdaily_api/sketchdaily_api.dart';
 
 void main() {
   group('FullBody', () {
+    test('Can count fullbodies without any options', () async {
+      final count = await FullBody.count(const FullBodyOption());
+      expect(count, greaterThan(0));
+    });
     test('Get fullbody without any options', () async {
       FullBody fullBody = (await FullBody.getFullBody())!;
       expect(fullBody, isNotNull);

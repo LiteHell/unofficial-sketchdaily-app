@@ -6,6 +6,8 @@ import 'package:sketchdaily/sketchdaily_api/request/api_post_request.dart';
 import 'package:sketchdaily/sketchdaily_api/sketchdaily_image.dart';
 import 'package:sketchdaily/sketchdaily_api/view_angle.dart';
 
+import '../request/api_get_request.dart';
+
 class FullBody extends SketchDailyImage {
   final FullBodyOption classification;
   final Person? model;
@@ -44,9 +46,7 @@ class FullBody extends SketchDailyImage {
     );
   }
 
-  static Future<FullBody?> getFullBody(
-      [FullBodyOption option = const FullBodyOption(),
-      List<String> excludeIds = const []]) async {
+  static Map<String, String> createParameters(FullBodyOption option) {
     Map<String, String> parameters = {};
 
     if (option.gender != null) {
@@ -64,6 +64,22 @@ class FullBody extends SketchDailyImage {
     if (option.viewAngle != null) {
       parameters['ViewAngle'] = option.viewAngle!.name.toFirstLetterUpperCase();
     }
+
+    return parameters;
+  }
+
+  static Future<int> count(FullBodyOption option,
+      {bool recentImagesOnly = false}) async {
+    Map<String, String> parameters = createParameters(option);
+    parameters['recentImagesOnly'] = recentImagesOnly ? 'true' : 'false';
+
+    return await getSketchDailyApi('/api/FullBodies/Count', parameters) as int;
+  }
+
+  static Future<FullBody?> getFullBody(
+      [FullBodyOption option = const FullBodyOption(),
+      List<String> excludeIds = const []]) async {
+    Map<String, String> parameters = createParameters(option);
 
     dynamic response = await postJsonSketchDailyApi(
         '/api/FullBodies/Next', excludeIds, parameters);

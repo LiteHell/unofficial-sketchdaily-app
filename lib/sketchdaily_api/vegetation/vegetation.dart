@@ -4,6 +4,8 @@ import 'package:sketchdaily/sketchdaily_api/request/api_post_request.dart';
 import 'package:sketchdaily/sketchdaily_api/sketchdaily_image.dart';
 import 'package:sketchdaily/sketchdaily_api/vegetation/vegetation_option.dart';
 
+import '../request/api_get_request.dart';
+
 class Vegetation extends SketchDailyImage {
   final VegetationOption classification;
 
@@ -15,16 +17,32 @@ class Vegetation extends SketchDailyImage {
       required super.photographer,
       required this.classification});
 
-  static Future<Vegetation?> getVegetation(
-      [VegetationOption option = const VegetationOption(),
-      List<String> excludeIds = const []]) async {
+  static Map<String, String> createParameters(VegetationOption option) {
     Map<String, String> parameters = {};
+
     if (option.type != null) {
       parameters['VegetationType'] = option.type!.name.toFirstLetterUpperCase();
     }
     if (option.photoType != null) {
       parameters['PhotoType'] = option.photoType!.name.toFirstLetterUpperCase();
     }
+
+    return parameters;
+  }
+
+  static Future<int> count(VegetationOption option,
+      {bool recentImagesOnly = false}) async {
+    Map<String, String> parameters = createParameters(option);
+    parameters['recentImagesOnly'] = recentImagesOnly ? 'true' : 'false';
+
+    return await getSketchDailyApi('/api/Vegetation/Count', parameters) as int;
+  }
+
+  static Future<Vegetation?> getVegetation(
+      [VegetationOption option = const VegetationOption(),
+      List<String> excludeIds = const []]) async {
+    Map<String, String> parameters = createParameters(option);
+
     final response = await postJsonSketchDailyApi(
         '/api/Vegetation/Next', excludeIds, parameters);
 

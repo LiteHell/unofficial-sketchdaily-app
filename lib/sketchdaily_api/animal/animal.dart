@@ -1,5 +1,7 @@
+import 'package:sketchdaily/extensions/first_letter_upper_case_extension.dart';
 import 'package:sketchdaily/sketchdaily_api/animal/animal_option.dart';
 import 'package:sketchdaily/sketchdaily_api/person.dart';
+import 'package:sketchdaily/sketchdaily_api/request/api_get_request.dart';
 import 'package:sketchdaily/sketchdaily_api/request/api_post_request.dart';
 import 'package:sketchdaily/sketchdaily_api/sketchdaily_image.dart';
 import 'package:sketchdaily/sketchdaily_api/view_angle.dart';
@@ -37,57 +39,33 @@ class Animal extends SketchDailyImage {
     );
   }
 
-  static Future<Animal?> getAnimal(AnimalOption option,
-      [List<String> excludeIds = const []]) async {
+  static Map<String, String> createParameters(AnimalOption option) {
     Map<String, String> parameters = {};
 
-    switch (option.category) {
-      case AnimalCategory.living:
-        parameters['Category'] = 'Living';
-        break;
-      case AnimalCategory.skeletonOrBones:
-        parameters['Category'] = 'SkeletonOrBones';
-        break;
-      default:
-        break;
+    if (option.category != null) {
+      parameters['Category'] = option.category!.name.toFirstLetterUpperCase();
+    }
+    if (option.species != null) {
+      parameters['Species'] = option.species!.name.toFirstLetterUpperCase();
+    }
+    if (option.viewAngle != null) {
+      parameters['ViewAngle'] = option.viewAngle!.name.toFirstLetterUpperCase();
     }
 
-    switch (option.species) {
-      case AnimalSpecies.bird:
-        parameters['Species'] = 'Bird';
-        break;
-      case AnimalSpecies.fish:
-        parameters['Species'] = 'Fish';
-        break;
-      case AnimalSpecies.reptileOrAmphibian:
-        parameters['Species'] = 'ReptileOrAmphibian';
-        break;
-      case AnimalSpecies.bug:
-        parameters['Species'] = 'Bug';
-        break;
-      case AnimalSpecies.mammal:
-        parameters['Species'] = 'Mammal';
-        break;
-      default:
-        break;
-    }
+    return parameters;
+  }
 
-    switch (option.viewAngle) {
-      case ViewAngle.front:
-        parameters['ViewAngle'] = 'Front';
-        break;
-      case ViewAngle.side:
-        parameters['ViewAngle'] = 'Side';
-        break;
-      case ViewAngle.back:
-        parameters['ViewAngle'] = 'Back';
-        break;
-      case ViewAngle.aboveOrBelow:
-        parameters['ViewAngle'] = 'AboveOrBelow';
-        break;
-      default:
-        break;
-    }
+  static Future<int> count(AnimalOption option,
+      {bool recentImagesOnly = false}) async {
+    Map<String, String> parameters = createParameters(option);
+    parameters['recentImagesOnly'] = recentImagesOnly ? 'true' : 'false';
+
+    return await getSketchDailyApi('/api/Animals/Count', parameters) as int;
+  }
+
+  static Future<Animal?> getAnimal(AnimalOption option,
+      [List<String> excludeIds = const []]) async {
+    Map<String, String> parameters = createParameters(option);
 
     dynamic response = await postJsonSketchDailyApi(
         '/api/Animals/Next', excludeIds, parameters);
