@@ -1,7 +1,7 @@
 import 'package:sketchdaily/extensions/first_letter_upper_case_extension.dart';
-import 'package:sketchdaily/sketchdaily_api/sketchdaily_image.dart';
 import 'package:sketchdaily/sketchdaily_api/person.dart';
 import 'package:sketchdaily/sketchdaily_api/request/api_post_request.dart';
+import 'package:sketchdaily/sketchdaily_api/sketchdaily_image.dart';
 
 class Structure extends SketchDailyImage {
   final StrctureType structureType;

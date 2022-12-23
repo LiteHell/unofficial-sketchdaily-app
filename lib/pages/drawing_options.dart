@@ -4,7 +4,6 @@ import 'package:sketchdaily/pages/amimal_picture_page.dart';
 import 'package:sketchdaily/sketchdaily_api/animal/animal_option.dart';
 import 'package:sketchdaily/sketchdaily_api/sketchdaily_api.dart';
 import 'package:sketchdaily/widgets/drawing_option/animal_drawing_options.dart';
-import 'package:sketchdaily/widgets/drawings_drawer.dart';
 
 class DrawingOptions extends StatefulWidget {
   const DrawingOptions({super.key});

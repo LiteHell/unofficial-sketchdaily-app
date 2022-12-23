@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:sketchdaily/sketchdaily_api/animal/animal.dart';
 import 'package:sketchdaily/sketchdaily_api/animal/animal_option.dart';

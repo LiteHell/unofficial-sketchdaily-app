@@ -1,9 +1,9 @@
 import 'package:sketchdaily/extensions/first_letter_upper_case_extension.dart';
 import 'package:sketchdaily/sketchdaily_api/body_part/body_part_option.dart';
 import 'package:sketchdaily/sketchdaily_api/gender.dart';
-import 'package:sketchdaily/sketchdaily_api/sketchdaily_image.dart';
 import 'package:sketchdaily/sketchdaily_api/person.dart';
 import 'package:sketchdaily/sketchdaily_api/request/api_post_request.dart';
+import 'package:sketchdaily/sketchdaily_api/sketchdaily_image.dart';
 import 'package:sketchdaily/sketchdaily_api/view_angle.dart';
 
 class BodyPart extends SketchDailyImage {

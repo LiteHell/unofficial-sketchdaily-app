@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:sketchdaily/sketchdaily_api/sketchdaily_api.dart';
 import 'package:sketchdaily/widgets/drawing_option/view_angle_button.dart';

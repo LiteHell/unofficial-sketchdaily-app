@@ -1,7 +1,7 @@
 import 'package:sketchdaily/sketchdaily_api/animal/animal_option.dart';
-import 'package:sketchdaily/sketchdaily_api/sketchdaily_image.dart';
 import 'package:sketchdaily/sketchdaily_api/person.dart';
 import 'package:sketchdaily/sketchdaily_api/request/api_post_request.dart';
+import 'package:sketchdaily/sketchdaily_api/sketchdaily_image.dart';
 import 'package:sketchdaily/sketchdaily_api/view_angle.dart';
 
 class Animal extends SketchDailyImage {
