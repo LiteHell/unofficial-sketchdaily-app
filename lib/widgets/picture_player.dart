@@ -120,6 +120,11 @@ class _PicturePlayerState extends State<PicturePlayer> {
   }
 
   void onTimerTick() async {
+    if (!mounted) {
+      // Skip when not mounted
+      return;
+    }
+
     if (index >= 0) {
       // Fetch next image if enough time is gone
       if (stopwatch.elapsed > widget.imageDuration &&
