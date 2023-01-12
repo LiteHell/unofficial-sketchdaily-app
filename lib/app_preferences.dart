@@ -30,4 +30,29 @@ class AppPreferences {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('picture-options', json.encode(options));
   }
+
+  static Future<void> writeDrawingTimeOptionFor(int idx, int? time) async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'drawing-options-time-$idx';
+    if (time == null) {
+      await prefs.setInt(key, -1);
+    } else {
+      await prefs.setInt(key, time!);
+    }
+  }
+
+  static Future<int?> readDrawingTimeOptionOf(int idx,
+      [int? defaultTime = 5]) async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'drawing-options-time-$idx';
+    final saved = prefs.getInt(key);
+
+    if (saved == -1) {
+      return null;
+    } else if (saved == null) {
+      return defaultTime;
+    } else {
+      return saved;
+    }
+  }
 }

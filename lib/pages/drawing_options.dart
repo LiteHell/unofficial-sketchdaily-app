@@ -20,17 +20,52 @@ class DrawingOptions extends StatefulWidget {
 
 class _DrawingOptionsState extends State<DrawingOptions> {
   OptionContainer options = OptionContainer();
-  bool _infiniteTime = false;
-  final TextEditingController _controller = TextEditingController(text: '5');
+  final List<bool> _isInfiniteTimes = [false, false, false, false, false];
+  final List<TextEditingController> _controllers = [
+    TextEditingController(text: '5'),
+    TextEditingController(text: '5'),
+    TextEditingController(text: '5'),
+    TextEditingController(text: '5'),
+    TextEditingController(text: '5')
+  ];
 
   _DrawingOptionsState() : super() {
     loadOptionsFromPreferences();
+    attachTextControllerListener();
+  }
+
+  void attachTextControllerListener() {
+    for (var i = 0; i < 5; i++) {
+      _controllers[i].addListener(() {
+        int? result = int.tryParse(_controllers[i].text);
+        if (result != null) {
+          AppPreferences.writeDrawingTimeOptionFor(i, result);
+        }
+      });
+    }
   }
 
   void loadOptionsFromPreferences() async {
     OptionContainer optionsLoaded = await AppPreferences.readPictureOptions();
+    List<int> times = [5, 5, 5, 5, 5];
+    List<bool> isInfiniteTimes = [false, false, false, false, false];
+    for (var i = 0; i < 5; i++) {
+      final time = await AppPreferences.readDrawingTimeOptionOf(i);
+      if (time == null) {
+        isInfiniteTimes[i] = true;
+      } else {
+        isInfiniteTimes[i] = false;
+        times[i] = time;
+      }
+    }
     if (mounted) {
-      setState(() => {options = optionsLoaded});
+      setState(() {
+        options = optionsLoaded;
+        for (var i = 0; i < 5; i++) {
+          _isInfiniteTimes[i] = isInfiniteTimes[i];
+          _controllers[i].text = times[i].toString();
+        }
+      });
     }
   }
 
@@ -38,18 +73,20 @@ class _DrawingOptionsState extends State<DrawingOptions> {
     await AppPreferences.writePictureOptions(options);
   }
 
-  void startDrawing(PictureOption options) {
+  void startDrawing(PictureOption options, int tabIndex) {
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => PicturePage(
               options: options,
-              duration: Duration(seconds: int.parse(_controller.text)),
-              infiniteDuration: _infiniteTime,
+              duration:
+                  Duration(seconds: int.parse(_controllers[tabIndex].text)),
+              infiniteDuration: _isInfiniteTimes[tabIndex],
             )));
   }
 
   Widget createOptionsTabPage({
     required Widget optionsWidget,
     required void Function() onStartPreseed,
+    required int tabIndex,
   }) {
     return SingleChildScrollView(
         child: Padding(
@@ -59,17 +96,27 @@ class _DrawingOptionsState extends State<DrawingOptions> {
               optionsWidget,
               const Text('Time (in seconds)'),
               TextField(
-                  controller: _controller,
+                  controller: _controllers[tabIndex],
                   keyboardType: TextInputType.number,
-                  enabled: !_infiniteTime,
+                  enabled: !_isInfiniteTimes[tabIndex],
                   maxLines: 1),
               Row(children: [
                 Checkbox(
-                    value: _infiniteTime,
+                    value: _isInfiniteTimes[tabIndex],
                     onChanged: (e) {
                       if (e != null) {
                         setState(() {
-                          _infiniteTime = e;
+                          _isInfiniteTimes[tabIndex] = e;
+                          int? parsedTime =
+                              int.tryParse(_controllers[tabIndex].text);
+
+                          if (e) {
+                            AppPreferences.writeDrawingTimeOptionFor(
+                                tabIndex, null);
+                          } else {
+                            AppPreferences.writeDrawingTimeOptionFor(
+                                tabIndex, parsedTime);
+                          }
                         });
                       }
                     }),
@@ -83,7 +130,7 @@ class _DrawingOptionsState extends State<DrawingOptions> {
             ])));
   }
 
-  Widget animalOptions() {
+  Widget animalOptions(int tabIndex) {
     return createOptionsTabPage(
         optionsWidget: AnimalDrawingOptions(
           options: options.animal,
@@ -95,11 +142,12 @@ class _DrawingOptionsState extends State<DrawingOptions> {
           },
         ),
         onStartPreseed: () {
-          startDrawing(options.animal);
-        });
+          startDrawing(options.animal, tabIndex);
+        },
+        tabIndex: tabIndex);
   }
 
-  Widget fullBodyOptions() {
+  Widget fullBodyOptions(int tabIndex) {
     return createOptionsTabPage(
         optionsWidget: FullBodyDrawingOptions(
           options: options.fullBody,
@@ -111,11 +159,12 @@ class _DrawingOptionsState extends State<DrawingOptions> {
           },
         ),
         onStartPreseed: () {
-          startDrawing(options.fullBody);
-        });
+          startDrawing(options.fullBody, tabIndex);
+        },
+        tabIndex: tabIndex);
   }
 
-  Widget bodyPartOptions() {
+  Widget bodyPartOptions(int tabIndex) {
     return createOptionsTabPage(
         optionsWidget: BodyPartDrawingOptions(
           options: options.bodyPart,
@@ -127,11 +176,12 @@ class _DrawingOptionsState extends State<DrawingOptions> {
           },
         ),
         onStartPreseed: () {
-          startDrawing(options.bodyPart);
-        });
+          startDrawing(options.bodyPart, tabIndex);
+        },
+        tabIndex: tabIndex);
   }
 
-  Widget vegetationOptions() {
+  Widget vegetationOptions(int tabIndex) {
     return createOptionsTabPage(
         optionsWidget: VegetationDrawingOptions(
           options: options.vegetation,
@@ -143,11 +193,12 @@ class _DrawingOptionsState extends State<DrawingOptions> {
           },
         ),
         onStartPreseed: () {
-          startDrawing(options.vegetation);
-        });
+          startDrawing(options.vegetation, tabIndex);
+        },
+        tabIndex: tabIndex);
   }
 
-  Widget structureOptions() {
+  Widget structureOptions(int tabIndex) {
     return createOptionsTabPage(
         optionsWidget: StructureDrawingOptions(
           options: options.structure,
@@ -159,15 +210,16 @@ class _DrawingOptionsState extends State<DrawingOptions> {
           },
         ),
         onStartPreseed: () {
-          startDrawing(options.structure);
-        });
+          startDrawing(options.structure, tabIndex);
+        },
+        tabIndex: tabIndex);
   }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
         length: 5,
-        initialIndex: 1,
+        initialIndex: 0,
         child: Scaffold(
             appBar: AppBar(
               title: const Text('Drawing options'),
@@ -191,11 +243,11 @@ class _DrawingOptionsState extends State<DrawingOptions> {
             ),
             //drawer: drawingsDrawer(context),
             body: TabBarView(children: [
-              fullBodyOptions(),
-              bodyPartOptions(),
-              animalOptions(),
-              structureOptions(),
-              vegetationOptions()
+              fullBodyOptions(0),
+              bodyPartOptions(1),
+              animalOptions(2),
+              structureOptions(3),
+              vegetationOptions(4)
             ])));
   }
 }
