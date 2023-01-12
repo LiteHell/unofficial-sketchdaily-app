@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:sketchdaily/sketchdaily_api/sketchdaily_api.dart';
-import 'package:sketchdaily/widgets/drawing_option/view_angle_button.dart';
+import 'package:sketchdaily/widgets/buttons/choice_chips.dart';
+import 'package:sketchdaily/widgets/buttons/view_angle_button.dart';
 
 class AnimalDrawingOptions extends StatelessWidget {
   final AnimalOption options;
@@ -44,39 +45,25 @@ class AnimalDrawingOptions extends StatelessWidget {
         });
   }
 
-  void Function() _setCategoryClosure(AnimalCategory? category) {
-    return () {
-      onChanged(AnimalOption(
-          category: category,
-          species: options.species,
-          viewAngle: options.viewAngle));
-    };
-  }
-
-  void Function()? _animalCategoryOnPressedClosure(AnimalCategory? option) {
-    if (options.category == option) {
-      return null;
-    }
-    return _setCategoryClosure(option);
-  }
-
-  Widget _animalCategoryButtons() {
-    return Row(
-      children: [
-        ElevatedButton(
-            onPressed: _animalCategoryOnPressedClosure(null),
-            child: const Text('All')),
-        const SizedBox(width: 5),
-        ElevatedButton(
-            onPressed: _animalCategoryOnPressedClosure(AnimalCategory.living),
-            child: const Text('Living')),
-        const SizedBox(width: 5),
-        ElevatedButton(
-            onPressed:
-                _animalCategoryOnPressedClosure(AnimalCategory.skeletonOrBones),
-            child: const Text('Dead'))
-      ],
-    );
+  Widget _animalCategoryChips() {
+    return ChoiceChips<AnimalCategory>(
+        value: options.category,
+        onChanged: (category) {
+          if (options.category != category) {
+            onChanged(AnimalOption(
+                category: category,
+                species: options.species,
+                viewAngle: options.viewAngle));
+          }
+        },
+        values: const [
+          ChoiceChipValueDescription<AnimalCategory>(
+              value: null, description: 'All'),
+          ChoiceChipValueDescription<AnimalCategory>(
+              value: AnimalCategory.living, description: 'Living'),
+          ChoiceChipValueDescription<AnimalCategory>(
+              value: AnimalCategory.skeletonOrBones, description: 'Dead'),
+        ]);
   }
 
   @override
@@ -87,7 +74,7 @@ class AnimalDrawingOptions extends StatelessWidget {
         const Text('Species'),
         _animalSpeicesDropdown(),
         const Text('Category'),
-        _animalCategoryButtons(),
+        _animalCategoryChips(),
         const Text('View Angle'),
         ViewAngleButton(
             value: options.viewAngle,
