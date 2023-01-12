@@ -1,35 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sketchdaily/app_preferences.dart';
 import 'package:sketchdaily/pages/picture_page.dart';
-import 'package:sketchdaily/sketchdaily_api/animal/animal_option.dart';
-import 'package:sketchdaily/sketchdaily_api/body_part/body_part_option.dart';
-import 'package:sketchdaily/sketchdaily_api/full_body/full_body_option.dart';
 import 'package:sketchdaily/sketchdaily_api/picture_options.dart';
-import 'package:sketchdaily/sketchdaily_api/sketchdaily_api.dart';
-import 'package:sketchdaily/sketchdaily_api/structure/structure_option.dart';
-import 'package:sketchdaily/sketchdaily_api/vegetation/vegetation_option.dart';
 import 'package:sketchdaily/widgets/drawing_option/animal_drawing_options.dart';
 
+import '../option_container.dart';
 import '../widgets/drawing_option/body_part_drawing_options.dart';
 import '../widgets/drawing_option/full_body_drawing_options.dart';
 import '../widgets/drawing_option/structure_drawing_options.dart';
 import '../widgets/drawing_option/vegetation_drawing_options.dart';
-
-class OptionContainer {
-  AnimalOption animal =
-      const AnimalOption(species: null, category: null, viewAngle: null);
-  FullBodyOption fullBody = const FullBodyOption(
-      nsfw: null,
-      clothing: true,
-      gender: null,
-      poseType: null,
-      viewAngle: null);
-  BodyPartOption bodyPart =
-      const BodyPartOption(bodyPart: null, gender: null, viewAngle: null);
-  VegetationOption vegetation =
-      const VegetationOption(photoType: null, type: null);
-  StructureOption structure = const StructureOption(null);
-}
 
 class DrawingOptions extends StatefulWidget {
   const DrawingOptions({super.key});
@@ -39,9 +19,24 @@ class DrawingOptions extends StatefulWidget {
 }
 
 class _DrawingOptionsState extends State<DrawingOptions> {
-  final OptionContainer options = OptionContainer();
+  OptionContainer options = OptionContainer();
   bool _infiniteTime = false;
   final TextEditingController _controller = TextEditingController(text: '5');
+
+  _DrawingOptionsState() : super() {
+    loadOptionsFromPreferences();
+  }
+
+  void loadOptionsFromPreferences() async {
+    OptionContainer optionsLoaded = await AppPreferences.readPictureOptions();
+    if (mounted) {
+      setState(() => {options = optionsLoaded});
+    }
+  }
+
+  void saveOptionsToPreferences() async {
+    await AppPreferences.writePictureOptions(options);
+  }
 
   void startDrawing(PictureOption options) {
     Navigator.of(context).push(MaterialPageRoute(
@@ -95,6 +90,7 @@ class _DrawingOptionsState extends State<DrawingOptions> {
           onChanged: (e) {
             setState(() {
               options.animal = e;
+              saveOptionsToPreferences();
             });
           },
         ),
@@ -110,6 +106,7 @@ class _DrawingOptionsState extends State<DrawingOptions> {
           onChanged: (e) {
             setState(() {
               options.fullBody = e;
+              saveOptionsToPreferences();
             });
           },
         ),
@@ -125,6 +122,7 @@ class _DrawingOptionsState extends State<DrawingOptions> {
           onChanged: (e) {
             setState(() {
               options.bodyPart = e;
+              saveOptionsToPreferences();
             });
           },
         ),
@@ -140,6 +138,7 @@ class _DrawingOptionsState extends State<DrawingOptions> {
           onChanged: (e) {
             setState(() {
               options.vegetation = e;
+              saveOptionsToPreferences();
             });
           },
         ),
@@ -155,6 +154,7 @@ class _DrawingOptionsState extends State<DrawingOptions> {
           onChanged: (e) {
             setState(() {
               options.structure = e;
+              saveOptionsToPreferences();
             });
           },
         ),
