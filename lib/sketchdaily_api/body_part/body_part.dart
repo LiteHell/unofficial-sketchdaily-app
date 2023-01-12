@@ -67,7 +67,7 @@ class BodyPart extends SketchDailyImage {
     return await getSketchDailyApi('/api/BodyParts/Count', parameters) as int;
   }
 
-  static Future<BodyPart?> getFullBody(
+  static Future<BodyPart?> getBodyPart(
       [BodyPartOption option = const BodyPartOption(),
       List<String> excludeIds = const []]) async {
     Map<String, String> parameters = createParameters(option);

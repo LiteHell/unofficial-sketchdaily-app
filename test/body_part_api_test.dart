@@ -12,7 +12,7 @@ void main() {
       expect(count, greaterThan(0));
     });
     test('Get bodyPart without any options', () async {
-      BodyPart bodyPart = (await BodyPart.getFullBody())!;
+      BodyPart bodyPart = (await BodyPart.getBodyPart())!;
       expect(bodyPart, isNotNull);
       final image = await http.get(bodyPart.uri);
       expect(image.statusCode, 200);
@@ -23,7 +23,7 @@ void main() {
     test('Get bodyPart with gender option', () async {
       for (final i in Gender.values) {
         BodyPartOption option = BodyPartOption(gender: i);
-        BodyPart bodyPart = (await BodyPart.getFullBody(option))!;
+        BodyPart bodyPart = (await BodyPart.getBodyPart(option))!;
         expect(bodyPart, isNotNull);
         final image = await http.get(bodyPart.uri);
         expect(image.statusCode, 200);
@@ -38,7 +38,7 @@ void main() {
         if (i == BodyPartType.foot)
           continue; // Currently there're no foot images in sketchdaily website
         BodyPartOption option = BodyPartOption(bodyPart: i);
-        BodyPart bodyPart = (await BodyPart.getFullBody(option))!;
+        BodyPart bodyPart = (await BodyPart.getBodyPart(option))!;
         expect(bodyPart, isNotNull);
         final image = await http.get(bodyPart.uri);
         expect(image.statusCode, 200);
@@ -51,7 +51,7 @@ void main() {
     test('Get bodyPart with viewAngle option', () async {
       for (final i in ViewAngle.values) {
         BodyPartOption option = BodyPartOption(viewAngle: i);
-        BodyPart bodyPart = (await BodyPart.getFullBody(option))!;
+        BodyPart bodyPart = (await BodyPart.getBodyPart(option))!;
         expect(bodyPart, isNotNull);
         final image = await http.get(bodyPart.uri);
         expect(image.statusCode, 200);
