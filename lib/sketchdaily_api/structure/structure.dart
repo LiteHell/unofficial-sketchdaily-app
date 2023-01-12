@@ -2,16 +2,17 @@ import 'package:sketchdaily/extensions/first_letter_upper_case_extension.dart';
 import 'package:sketchdaily/sketchdaily_api/person.dart';
 import 'package:sketchdaily/sketchdaily_api/request/api_post_request.dart';
 import 'package:sketchdaily/sketchdaily_api/sketchdaily_image.dart';
+import 'package:sketchdaily/sketchdaily_api/structure/structure_option.dart';
 
 import '../request/api_get_request.dart';
 
 class Structure extends SketchDailyImage {
-  final StrctureType structureType;
+  final StructureOption classification;
 
   Structure._privateConstructor(
       {required filePath,
       required photographer,
-      required this.structureType,
+      required this.classification,
       required uploadedAt,
       required uploader,
       required id})
@@ -22,7 +23,7 @@ class Structure extends SketchDailyImage {
             uploader: uploader,
             id: id);
 
-  static Future<int> count(StrctureType? structureType,
+  static Future<int> count(StructureType? structureType,
       {bool recentImagesOnly = false}) async {
     Map<String, String> parameters = {};
 
@@ -35,11 +36,12 @@ class Structure extends SketchDailyImage {
   }
 
   static Future<Structure?> getStructure(
-      {StrctureType? type, List<String> excludeIds = const []}) async {
+      [StructureOption option = const StructureOption(null),
+      List<String> excludeIds = const []]) async {
     Map<String, String> parameters = {};
 
-    if (type != null) {
-      parameters['StructureType'] = type.name.toFirstLetterUpperCase();
+    if (option.type != null) {
+      parameters['StructureType'] = option.type!.name.toFirstLetterUpperCase();
     }
     dynamic response = await postJsonSketchDailyApi(
         '/api/Structures/Next', excludeIds, parameters);
@@ -54,14 +56,12 @@ class Structure extends SketchDailyImage {
         id: response['id'],
         filePath: response['file'],
         photographer: photographer,
-        structureType: StrctureType.values.firstWhere((i) =>
+        classification: StructureOption(StructureType.values.firstWhere((i) =>
             i.name.toLowerCase() ==
             response['classifications']['structureType']
                 .toString()
-                .toLowerCase()),
+                .toLowerCase())),
         uploadedAt: DateTime.parse(response['uploadDate']),
         uploader: response['uploadedBy']);
   }
 }
-
-enum StrctureType { house, building, other }

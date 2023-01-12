@@ -1,7 +1,9 @@
 import 'package:sketchdaily/sketchdaily_api/gender.dart';
 import 'package:sketchdaily/sketchdaily_api/view_angle.dart';
 
-class BodyPartOption {
+import '../picture_options.dart';
+
+class BodyPartOption extends PictureOption {
   final Gender? gender;
   final BodyPartType? bodyPart;
   final ViewAngle? viewAngle;

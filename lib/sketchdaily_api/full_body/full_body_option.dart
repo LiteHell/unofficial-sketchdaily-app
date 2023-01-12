@@ -1,7 +1,9 @@
 import 'package:sketchdaily/sketchdaily_api/gender.dart';
 import 'package:sketchdaily/sketchdaily_api/view_angle.dart';
 
-class FullBodyOption {
+import '../picture_options.dart';
+
+class FullBodyOption extends PictureOption {
   final bool? nsfw;
   final bool? clothing;
   final Gender? gender;
@@ -9,12 +11,7 @@ class FullBodyOption {
   final ViewAngle? viewAngle;
 
   const FullBodyOption(
-      {this.nsfw, this.clothing, this.gender, this.poseType, this.viewAngle})
-      : assert(
-            clothing == true ||
-                nsfw == null ||
-                (nsfw == true && clothing == false),
-            'nsfw can be set only when clothing is true');
+      {this.nsfw, this.clothing, this.gender, this.poseType, this.viewAngle});
 }
 
 enum PoseType { action, stationary }
