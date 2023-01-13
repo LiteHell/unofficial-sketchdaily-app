@@ -1,7 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/file.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:sketchdaily/sketchdaily_api/sketchdaily_image.dart';
+import 'package:sketchdaily/widgets/get_cached_image.dart';
 
 class PicturePlayer extends StatefulWidget {
   final Duration imageDuration;
@@ -26,6 +29,8 @@ class _PicturePlayerState extends State<PicturePlayer> {
   bool stopped = false;
   bool noMoreImages = false;
   String elapsedTimerString = '??:??';
+  bool loadingImage = false;
+  File? currentCachedFile = null;
 
   @override
   void initState() {
@@ -74,8 +79,7 @@ class _PicturePlayerState extends State<PicturePlayer> {
     setState(() {
       index = nextIndex;
     });
-    stopwatch.reset();
-    stopwatch.start();
+    fetchImage();
   }
 
   void goFirst() {
@@ -83,8 +87,7 @@ class _PicturePlayerState extends State<PicturePlayer> {
     setState(() {
       index = 0;
     });
-    stopwatch.reset();
-    stopwatch.start();
+    fetchImage();
   }
 
   void goPrev() {
@@ -94,8 +97,7 @@ class _PicturePlayerState extends State<PicturePlayer> {
     setState(() {
       index = prevIndex;
     });
-    stopwatch.reset();
-    stopwatch.start();
+    fetchImage();
   }
 
   void goLast() {
@@ -103,8 +105,7 @@ class _PicturePlayerState extends State<PicturePlayer> {
     setState(() {
       index = images.length - 1;
     });
-    stopwatch.reset();
-    stopwatch.start();
+    fetchImage();
   }
 
   void toggleStopwatch() {
@@ -119,6 +120,28 @@ class _PicturePlayerState extends State<PicturePlayer> {
     });
   }
 
+  void fetchImage() {
+    setState(() {
+      currentCachedFile = null;
+      loadingImage = true;
+    });
+    stopwatch.stop();
+    getCachedFile(
+        url: images[index].uri.toString(), onCompleted: onImageFetched);
+  }
+
+  void onImageFetched(String cacheKey, FileInfo fileInfo) {
+    if (images[index].uri.toString() != cacheKey) {
+      return;
+    }
+    setState(() {
+      currentCachedFile = fileInfo.file;
+      loadingImage = false;
+    });
+    stopwatch.reset();
+    stopwatch.start();
+  }
+
   void onTimerTick() async {
     if (!mounted) {
       // Skip when not mounted
@@ -129,15 +152,20 @@ class _PicturePlayerState extends State<PicturePlayer> {
       // Fetch next image if enough time is gone
       if (stopwatch.elapsed > widget.imageDuration &&
           !widget.infiniteDuration &&
-          !stopped) {
+          !stopped &&
+          !loadingImage) {
         setState(() {
-          elapsedTimerString = 'Loading...';
+          elapsedTimerString = 'Requesting next image...';
         });
         await goNext();
       } else {
         if (widget.infiniteDuration) {
           setState(() {
             elapsedTimerString = 'Infinite';
+          });
+        } else if (currentCachedFile == null || loadingImage) {
+          setState(() {
+            elapsedTimerString = 'Downloading image...';
           });
         } else {
           setState(() {
@@ -149,6 +177,18 @@ class _PicturePlayerState extends State<PicturePlayer> {
       // Fetch first image
       await goNext();
     }
+  }
+
+  Widget cacheImageWidget() {
+    final image = currentCachedFile;
+    return image != null
+        ? Image.file(
+            image,
+            fit: BoxFit.contain,
+          )
+        : const Center(
+            child: CircularProgressIndicator(),
+          );
   }
 
   @override
@@ -167,10 +207,7 @@ class _PicturePlayerState extends State<PicturePlayer> {
                 ? (noMoreImages
                     ? const Center(child: Text('no more images'))
                     : const Center(child: CircularProgressIndicator()))
-                : Image.network(
-                    images[index].uri.toString(),
-                    fit: BoxFit.contain,
-                  )),
+                : cacheImageWidget()),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
