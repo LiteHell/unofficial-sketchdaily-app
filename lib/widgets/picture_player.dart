@@ -32,7 +32,7 @@ class _PicturePlayerState extends State<PicturePlayer> {
   bool noMoreImages = false;
   String elapsedTimerString = '??:??';
   bool loadingImage = false;
-  File? currentCachedFile = null;
+  File? currentCachedFile;
 
   @override
   void initState() {
