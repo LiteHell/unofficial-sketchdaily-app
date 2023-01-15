@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:sketchdaily/app_preferences.dart';
 import 'package:sketchdaily/pages/picture_page.dart';
 import 'package:sketchdaily/sketchdaily_api/picture_options.dart';
@@ -224,7 +223,7 @@ class _DrawingOptionsState extends State<DrawingOptions> {
         child: Scaffold(
             appBar: AppBar(
               title: const Text('Drawing options'),
-              actions: [CustomizedPopupMenu()],
+              actions: const [CustomizedPopupMenu()],
               bottom: const TabBar(isScrollable: true, tabs: <Widget>[
                 Tab(
                   text: 'Full body',

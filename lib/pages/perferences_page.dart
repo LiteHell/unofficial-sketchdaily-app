@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:sketchdaily/app_preferences.dart';
 import 'package:sketchdaily/widgets/get_cached_image.dart';
 
@@ -93,7 +92,6 @@ class _PreferencesPageState extends State<PreferencesPage> {
   }
 
   Iterable<Widget> picturePlayerSettings() {
-    const timeLeft = 'time left', elapsedTime = 'elapsed time';
     bool displayTimeLeft = this.displayTimeLeft ?? true;
     return [
       checkboxListTile(

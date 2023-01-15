@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:sketchdaily/pages/perferences_page.dart';
 
 import '../pages/about_page.dart';
 
 class CustomizedPopupMenu extends StatelessWidget {
-  List<PopupMenuItem> additionalMenus;
-  CustomizedPopupMenu({super.key, this.additionalMenus = const []});
+  final List<PopupMenuItem> additionalMenus;
+  const CustomizedPopupMenu({super.key, this.additionalMenus = const []});
 
   @override
   Widget build(BuildContext context) {

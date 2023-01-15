@@ -35,8 +35,9 @@ void main() {
 
     test('Get bodyPart with bodyPart option', () async {
       for (final i in BodyPartType.values) {
-        if (i == BodyPartType.foot)
+        if (i == BodyPartType.foot) {
           continue; // Currently there're no foot images in sketchdaily website
+        }
         BodyPartOption option = BodyPartOption(bodyPart: i);
         BodyPart bodyPart = (await BodyPart.getBodyPart(option))!;
         expect(bodyPart, isNotNull);

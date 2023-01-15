@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class ChoiceChipValueDescription<T> {
   final T? value;
@@ -22,12 +20,6 @@ class ChoiceChips<T> extends StatelessWidget {
     for (final i in values) {
       descriptions[i.value] = i.description;
     }
-  }
-
-  void Function(bool selected)? _onSelectedClosure(T? option) {
-    return (bool selected) {
-      if (selected && value != option) onChanged(option);
-    };
   }
 
   @override

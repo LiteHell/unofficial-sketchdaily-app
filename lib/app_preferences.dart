@@ -68,7 +68,7 @@ class AppPreferences {
     if (time == null) {
       await prefs.setInt(key, -1);
     } else {
-      await prefs.setInt(key, time!);
+      await prefs.setInt(key, time);
     }
   }
 

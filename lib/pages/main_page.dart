@@ -11,7 +11,7 @@ class MainPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('SketchDaily reference'),
-        actions: [CustomizedPopupMenu()],
+        actions: const [CustomizedPopupMenu()],
       ),
       body: Column(children: [
         const Flexible(child: Announcements()),

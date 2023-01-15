@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:sketchdaily/extensions/whitespace_first_letter_upper_case_extension.dart';
 import 'package:sketchdaily/sketchdaily_api/body_part/body_part.dart';
 import 'package:sketchdaily/sketchdaily_api/full_body/full_body_option.dart';

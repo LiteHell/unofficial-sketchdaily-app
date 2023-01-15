@@ -5,7 +5,7 @@ extension ToWhitespaceFirstLetterUpperCaseExtension on String {
     } else {
       final temp = [this[0].toUpperCase()];
 
-      for (var i = 1; i < this.length; i++) {
+      for (var i = 1; i < length; i++) {
         final ch = this[i];
         if (ch == ch.toUpperCase()) {
           temp.add(ch);
