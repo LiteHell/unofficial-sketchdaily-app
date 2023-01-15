@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:sketchdaily/pages/main_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const SketchDailyReferenceApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class SketchDailyReferenceApp extends StatelessWidget {
+  const SketchDailyReferenceApp({super.key});
 
   // This widget is the root of your application.
   @override
