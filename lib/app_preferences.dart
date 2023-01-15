@@ -46,9 +46,20 @@ class AppPreferences {
     }
   }
 
+  static Future<void> clearPictureOptions() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('picture-options');
+  }
+
   static Future<void> writePictureOptions(OptionContainer options) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('picture-options', json.encode(options));
+  }
+
+  static Future<void> clearDrawingTimeOptionFor(int idx) async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'drawing-options-time-$idx';
+    await prefs.remove(key);
   }
 
   static Future<void> writeDrawingTimeOptionFor(int idx, int? time) async {
@@ -74,5 +85,25 @@ class AppPreferences {
     } else {
       return saved;
     }
+  }
+
+  static Future<bool> doDisplayElapsedTimeOnInfiniteTime() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('display-elapsed-time-on-infinite') ?? true;
+  }
+
+  static Future<void> setDisplayElapsedTimeOnInfiniteTime(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('display-elapsed-time-on-infinite', value);
+  }
+
+  static Future<bool> doDisplayRemainingTimeOnPlayer() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('display-time-left-on-player') ?? true;
+  }
+
+  static Future<void> setDisplayTimeLeftOnPlayer(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('display-time-left-on-player', value);
   }
 }

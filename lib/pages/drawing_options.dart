@@ -6,6 +6,7 @@ import 'package:sketchdaily/sketchdaily_api/picture_options.dart';
 import 'package:sketchdaily/widgets/drawing_option/animal_drawing_options.dart';
 
 import '../option_container.dart';
+import '../widgets/customized_popup_menu.dart';
 import '../widgets/drawing_option/body_part_drawing_options.dart';
 import '../widgets/drawing_option/full_body_drawing_options.dart';
 import '../widgets/drawing_option/structure_drawing_options.dart';
@@ -223,6 +224,7 @@ class _DrawingOptionsState extends State<DrawingOptions> {
         child: Scaffold(
             appBar: AppBar(
               title: const Text('Drawing options'),
+              actions: [CustomizedPopupMenu()],
               bottom: const TabBar(isScrollable: true, tabs: <Widget>[
                 Tab(
                   text: 'Full body',

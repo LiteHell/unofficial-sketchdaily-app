@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:sketchdaily/app_preferences.dart';
 import 'package:sketchdaily/pages/picture_info.dart';
 import 'package:sketchdaily/sketchdaily_api/animal/animal.dart';
 import 'package:sketchdaily/sketchdaily_api/animal/animal_option.dart';
@@ -33,9 +34,16 @@ class PicturePage extends StatefulWidget {
 class _PicturePageState extends State<PicturePage> {
   List<String> imageIds = [];
   SketchDailyImage? currentImage;
+  bool displayTimeLeft = true, displayElapsedTimeOnInfinite = true;
 
   void onCurrentImageChange(SketchDailyImage image) {
     currentImage = image;
+  }
+
+  void readPreferences() async {
+    displayTimeLeft = await AppPreferences.doDisplayRemainingTimeOnPlayer();
+    displayElapsedTimeOnInfinite =
+        await AppPreferences.doDisplayElapsedTimeOnInfiniteTime();
   }
 
   Future<SketchDailyImage?> getNextImage() async {
@@ -83,6 +91,8 @@ class _PicturePageState extends State<PicturePage> {
 
   @override
   Widget build(BuildContext context) {
+    readPreferences();
+
     return Scaffold(
         appBar: AppBar(
           title: Text(getTitle()),
@@ -105,8 +115,8 @@ class _PicturePageState extends State<PicturePage> {
           getNextImage: getNextImage,
           infiniteDuration: widget.infiniteDuration,
           onCurrentImageChange: onCurrentImageChange,
-          displayElapsedTimeOnInfinity: true,
-          displayElapsedTime: true,
+          displayElapsedTimeOnInfinity: displayElapsedTimeOnInfinite,
+          displayElapsedTime: !displayTimeLeft,
         ));
   }
 }

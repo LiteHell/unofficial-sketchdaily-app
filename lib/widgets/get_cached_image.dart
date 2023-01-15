@@ -1,5 +1,9 @@
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
+Future<void> clearCache() async {
+  await DefaultCacheManager().emptyCache();
+}
+
 Future<void> getCachedFile(
     {String? cacheKey,
     required String url,
