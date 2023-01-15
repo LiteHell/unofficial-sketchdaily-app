@@ -104,7 +104,9 @@ class _PicturePageState extends State<PicturePage> {
           imageDuration: widget.duration,
           getNextImage: getNextImage,
           infiniteDuration: widget.infiniteDuration,
-          onCurrentImageChange: onCurrentImageChange
+          onCurrentImageChange: onCurrentImageChange,
+          displayElapsedTimeOnInfinity: true,
+          displayElapsedTime: true,
         ));
   }
 }

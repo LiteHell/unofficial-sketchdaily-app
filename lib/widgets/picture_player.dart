@@ -11,10 +11,14 @@ class PicturePlayer extends StatefulWidget {
   final Future<SketchDailyImage?> Function() getNextImage;
   final void Function(SketchDailyImage)? onCurrentImageChange;
   final bool infiniteDuration;
+  final bool displayElapsedTime;
+  final bool displayElapsedTimeOnInfinity;
   const PicturePlayer({
     super.key,
     required this.imageDuration,
     required this.getNextImage,
+    required this.displayElapsedTime,
+    required this.displayElapsedTimeOnInfinity,
     this.onCurrentImageChange,
     this.infiniteDuration = false,
   });
@@ -164,17 +168,29 @@ class _PicturePlayerState extends State<PicturePlayer> {
         });
         await goNext();
       } else {
-        if (widget.infiniteDuration) {
-          setState(() {
-            elapsedTimerString = 'Infinite';
-          });
-        } else if (currentCachedFile == null || loadingImage) {
+        if (currentCachedFile == null || loadingImage) {
           setState(() {
             elapsedTimerString = 'Downloading image...';
           });
+        } else if (widget.infiniteDuration) {
+          if (widget.displayElapsedTimeOnInfinity) {
+            setState(() {
+              elapsedTimerString =
+                  '${formatDuration(stopwatch.elapsed)} (Infinite)';
+            });
+          } else {
+            setState(() {
+              elapsedTimerString = 'Infinite';
+            });
+          }
         } else {
           setState(() {
-            elapsedTimerString = formatDuration(stopwatch.elapsed);
+            Duration elapsed = stopwatch.elapsed;
+            if (!widget.displayElapsedTime) {
+              elapsed = widget.imageDuration - elapsed;
+            }
+
+            elapsedTimerString = formatDuration(elapsed);
           });
         }
       }
