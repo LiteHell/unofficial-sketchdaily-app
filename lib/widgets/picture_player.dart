@@ -9,11 +9,13 @@ import 'package:sketchdaily/widgets/get_cached_image.dart';
 class PicturePlayer extends StatefulWidget {
   final Duration imageDuration;
   final Future<SketchDailyImage?> Function() getNextImage;
+  final void Function(SketchDailyImage)? onCurrentImageChange;
   final bool infiniteDuration;
   const PicturePlayer({
     super.key,
     required this.imageDuration,
     required this.getNextImage,
+    this.onCurrentImageChange,
     this.infiniteDuration = false,
   });
 
@@ -126,6 +128,9 @@ class _PicturePlayerState extends State<PicturePlayer> {
       loadingImage = true;
     });
     stopwatch.stop();
+    if (widget.onCurrentImageChange != null) {
+      widget.onCurrentImageChange!(images[index]);
+    }
     getCachedFile(
         url: images[index].uri.toString(), onCompleted: onImageFetched);
   }

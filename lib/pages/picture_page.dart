@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:sketchdaily/pages/picture_info.dart';
 import 'package:sketchdaily/sketchdaily_api/animal/animal.dart';
 import 'package:sketchdaily/sketchdaily_api/animal/animal_option.dart';
 import 'package:sketchdaily/sketchdaily_api/body_part/body_part.dart';
@@ -31,6 +32,11 @@ class PicturePage extends StatefulWidget {
 
 class _PicturePageState extends State<PicturePage> {
   List<String> imageIds = [];
+  SketchDailyImage? currentImage;
+
+  void onCurrentImageChange(SketchDailyImage image) {
+    currentImage = image;
+  }
 
   Future<SketchDailyImage?> getNextImage() async {
     SketchDailyImage? nextImage;
@@ -78,11 +84,27 @@ class _PicturePageState extends State<PicturePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text(getTitle())),
+        appBar: AppBar(
+          title: Text(getTitle()),
+          actions: [
+            IconButton(
+              onPressed: () {
+                SketchDailyImage? image = currentImage;
+                if (image == null) return;
+
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: ((context) => PictureInfo(image: image))));
+              },
+              icon: const Icon(Icons.info),
+              tooltip: 'Image information',
+            )
+          ],
+        ),
         body: PicturePlayer(
           imageDuration: widget.duration,
           getNextImage: getNextImage,
           infiniteDuration: widget.infiniteDuration,
+          onCurrentImageChange: onCurrentImageChange
         ));
   }
 }
