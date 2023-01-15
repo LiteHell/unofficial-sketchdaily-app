@@ -6,6 +6,8 @@ import 'package:sketchdaily/sketchdaily_api/news/announcement.dart';
 import 'package:sketchdaily/sketchdaily_api/news/news.dart';
 import 'package:sketchdaily/widgets/announcement_dialog.dart';
 
+import '../pages/drawing_options.dart';
+
 class Announcements extends StatefulWidget {
   const Announcements({super.key});
 
@@ -17,6 +19,24 @@ class _AnnouncementsState extends State<Announcements> {
   bool _gotAnnouncement = false;
   static const _newsLimit = 10;
   late PagingController<int, News> _pagingController;
+
+  void skipNewsWhenAlreadyRead() async {
+    if (!await AppPreferences.doSkipAlreadyReadNews()) return;
+    final news = await News.getNews();
+
+    if (!mounted) return;
+    final navigator = Navigator.of(context);
+    if (navigator.canPop()) {
+      navigator.pop();
+    }
+
+    if (await AppPreferences.isReadNews(news.first.id)) {
+      navigator.push(
+          MaterialPageRoute(builder: (context) => const DrawingOptions()));
+    } else {
+      await AppPreferences.markNewsRead(news.first.id);
+    }
+  }
 
   Future handleAnnouncement() async {
     if (_gotAnnouncement) return;
@@ -54,6 +74,7 @@ class _AnnouncementsState extends State<Announcements> {
       fetchNews(pageKey);
     });
     handleAnnouncement();
+    skipNewsWhenAlreadyRead();
   }
 
   Widget buildNewsTile(News news) {

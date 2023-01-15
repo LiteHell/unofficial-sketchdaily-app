@@ -5,6 +5,26 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'option_container.dart';
 
 class AppPreferences {
+  static Future<bool> doSkipAlreadyReadNews() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('skip-already-read-news') ?? true;
+  }
+
+  static Future<void> setSkipAlreadyReadNews(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('skip-already-read-news', value);
+  }
+
+  static Future<bool> isReadNews(String id) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('read-news-id') == id;
+  }
+
+  static Future<void> markNewsRead(String id) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('read-news-id', id);
+  }
+
   static Future<bool> isReadAnnouncement(String id) async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('read-announcement-id') == id;
