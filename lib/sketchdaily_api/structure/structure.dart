@@ -6,22 +6,14 @@ import 'package:sketchdaily/sketchdaily_api/structure/structure_option.dart';
 
 import '../request/api_get_request.dart';
 
-class Structure extends SketchDailyImage {
-  final StructureOption classification;
-
+class Structure extends SketchDailyImage<StructureOption> {
   Structure._privateConstructor(
-      {required filePath,
-      required photographer,
-      required this.classification,
-      required uploadedAt,
-      required uploader,
-      required id})
-      : super(
-            filePath: filePath,
-            photographer: photographer,
-            uploadedAt: uploadedAt,
-            uploader: uploader,
-            id: id);
+      {required super.filePath,
+      required super.photographer,
+      required super.classification,
+      required super.uploadedAt,
+      required super.uploader,
+      required super.id});
 
   static Future<int> count(StructureType? structureType,
       {bool recentImagesOnly = false}) async {

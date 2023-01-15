@@ -6,16 +6,14 @@ import 'package:sketchdaily/sketchdaily_api/vegetation/vegetation_option.dart';
 
 import '../request/api_get_request.dart';
 
-class Vegetation extends SketchDailyImage {
-  final VegetationOption classification;
-
+class Vegetation extends SketchDailyImage<VegetationOption> {
   Vegetation._privateConstructor(
       {required super.filePath,
       required super.id,
       required super.uploadedAt,
       required super.uploader,
       required super.photographer,
-      required this.classification});
+      required super.classification});
 
   static Map<String, String> createParameters(VegetationOption option) {
     Map<String, String> parameters = {};

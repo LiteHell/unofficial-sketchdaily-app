@@ -1,11 +1,13 @@
+import 'package:sketchdaily/sketchdaily_api/picture_options.dart';
 import 'package:sketchdaily/sketchdaily_api/sketchdaily_api.dart';
 
-class SketchDailyImage {
+class SketchDailyImage<T extends PictureOption> {
   final String filePath;
   final String id;
   final DateTime uploadedAt;
   final String uploader;
   final Person? photographer;
+  final T classification;
   Uri get uri => Uri.http('reference.sketchdaily.net:4000', filePath);
 
   SketchDailyImage(
@@ -13,5 +15,6 @@ class SketchDailyImage {
       required this.id,
       required this.uploadedAt,
       required this.uploader,
-      required this.photographer});
+      required this.photographer,
+      required this.classification});
 }

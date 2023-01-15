@@ -6,24 +6,17 @@ import 'package:sketchdaily/sketchdaily_api/request/api_post_request.dart';
 import 'package:sketchdaily/sketchdaily_api/sketchdaily_image.dart';
 import 'package:sketchdaily/sketchdaily_api/view_angle.dart';
 
-class Animal extends SketchDailyImage {
-  final AnimalOption classification;
+class Animal extends SketchDailyImage<AnimalOption> {
   @override
   Uri get uri => Uri.http('reference.sketchdaily.net:4000', filePath);
 
   Animal._privateConstructor(
-      {required id,
-      required filePath,
-      required photographer,
-      required uploadedAt,
-      required uploader,
-      required this.classification})
-      : super(
-            id: id,
-            filePath: filePath,
-            uploader: uploader,
-            uploadedAt: uploadedAt,
-            photographer: photographer);
+      {required super.id,
+      required super.filePath,
+      required super.photographer,
+      required super.uploadedAt,
+      required super.uploader,
+      required super.classification});
 
   static AnimalOption createClassification(dynamic object) {
     return AnimalOption(

@@ -8,26 +8,19 @@ import 'package:sketchdaily/sketchdaily_api/view_angle.dart';
 
 import '../request/api_get_request.dart';
 
-class FullBody extends SketchDailyImage {
-  final FullBodyOption classification;
+class FullBody extends SketchDailyImage<FullBodyOption> {
   final Person? model;
   @override
   Uri get uri => Uri.http('reference.sketchdaily.net:4000', filePath);
 
   FullBody._privateConstructor(
-      {required id,
-      required filePath,
-      required photographer,
-      required uploadedAt,
-      required uploader,
+      {required super.id,
+      required super.filePath,
+      required super.photographer,
+      required super.uploadedAt,
+      required super.uploader,
       required this.model,
-      required this.classification})
-      : super(
-            id: id,
-            filePath: filePath,
-            uploader: uploader,
-            uploadedAt: uploadedAt,
-            photographer: photographer);
+      required super.classification});
 
   static FullBodyOption createClassification(dynamic object,
       {required bool? nsfw}) {
