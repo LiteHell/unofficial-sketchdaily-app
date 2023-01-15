@@ -136,7 +136,7 @@ class _PicturePlayerState extends State<PicturePlayer> {
   }
 
   void onImageFetched(String cacheKey, FileInfo fileInfo) {
-    if (images[index].uri.toString() != cacheKey) {
+    if (!mounted || images[index].uri.toString() != cacheKey) {
       return;
     }
     setState(() {
