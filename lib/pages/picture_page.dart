@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:sketchdaily/app_preferences.dart';
 import 'package:sketchdaily/pages/picture_info.dart';
+import 'package:sketchdaily/pages/report_image.dart';
 import 'package:sketchdaily/sketchdaily_api/animal/animal.dart';
 import 'package:sketchdaily/sketchdaily_api/animal/animal_option.dart';
 import 'package:sketchdaily/sketchdaily_api/body_part/body_part.dart';
 import 'package:sketchdaily/sketchdaily_api/body_part/body_part_option.dart';
 import 'package:sketchdaily/sketchdaily_api/full_body/full_body.dart';
 import 'package:sketchdaily/sketchdaily_api/full_body/full_body_option.dart';
+import 'package:sketchdaily/sketchdaily_api/report_image.dart';
 import 'package:sketchdaily/sketchdaily_api/sketchdaily_image.dart';
 import 'package:sketchdaily/sketchdaily_api/structure/structure.dart';
 import 'package:sketchdaily/sketchdaily_api/structure/structure_option.dart';
@@ -96,6 +98,35 @@ class _PicturePageState extends State<PicturePage> {
         appBar: AppBar(
           title: Text(getTitle()),
           actions: [
+            IconButton(
+              onPressed: () {
+                SketchDailyImage? image = currentImage;
+                if (image == null) return;
+
+                ImageType imageType;
+                if (image.classification is FullBodyOption) {
+                  imageType = ImageType.fullBody;
+                } else if (image.classification is BodyPartOption) {
+                  imageType = ImageType.bodyPart;
+                } else if (image.classification is AnimalOption) {
+                  imageType = ImageType.animal;
+                } else if (image.classification is StructureOption) {
+                  imageType = ImageType.structure;
+                } else if (image.classification is VegetationOption) {
+                  imageType = ImageType.vegetation;
+                } else {
+                  throw Exception('Unknown option subtype');
+                }
+
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: ((context) => ReportImagePage(
+                          imageId: image.id,
+                          imageType: imageType,
+                        ))));
+              },
+              icon: const Icon(Icons.report_problem_outlined),
+              tooltip: 'Report problem',
+            ),
             IconButton(
               onPressed: () {
                 SketchDailyImage? image = currentImage;

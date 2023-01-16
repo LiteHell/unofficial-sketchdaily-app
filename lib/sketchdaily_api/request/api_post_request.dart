@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 Future<dynamic> postJsonSketchDailyApi(String endpoint, dynamic body,
-    [Map<String, String>? parameters]) async {
+    [Map<String, dynamic>? parameters]) async {
   const codec = JsonCodec();
   final response = await http.post(
       Uri.http('reference.sketchdaily.net:4000', endpoint, parameters),
