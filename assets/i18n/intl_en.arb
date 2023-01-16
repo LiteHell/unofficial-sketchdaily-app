@@ -1,0 +1,729 @@
+{
+  "@@last_modified": "2023-01-16T23:59:05.959227",
+  "all": "All",
+  "@all": {
+    "description": "All, usually used in reference options",
+    "type": "text",
+    "placeholders": {}
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "OK",
+    "type": "text",
+    "placeholders": {}
+  },
+  "yes": "Yes",
+  "@yes": {
+    "description": "OK",
+    "type": "text",
+    "placeholders": {}
+  },
+  "no": "No",
+  "@no": {
+    "description": "OK",
+    "type": "text",
+    "placeholders": {}
+  },
+  "other": "Other",
+  "@other": {
+    "description": "Other",
+    "type": "text",
+    "placeholders": {}
+  },
+  "website": "Website",
+  "@website": {
+    "description": "Website, such as SketchDaily website or application github repository",
+    "type": "text",
+    "placeholders": {}
+  },
+  "start": "Start",
+  "@start": {
+    "description": "Start player",
+    "type": "text",
+    "placeholders": {}
+  },
+  "unknown": "Unknown",
+  "@unknown": {
+    "description": "Unknown, usually used for handling null values",
+    "type": "text",
+    "placeholders": {}
+  },
+  "gender": "Gender",
+  "@gender": {
+    "description": "Gender of human, usually used in reference options",
+    "type": "text",
+    "placeholders": {}
+  },
+  "male": "Male",
+  "@male": {
+    "description": "Male, usually used in reference options",
+    "type": "text",
+    "placeholders": {}
+  },
+  "female": "Female",
+  "@female": {
+    "description": "Female, usually used in reference options",
+    "type": "text",
+    "placeholders": {}
+  },
+  "viewAngle": "View angle",
+  "@viewAngle": {
+    "description": "View angle of a picture",
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboveOrBelow": "Above or below",
+  "@aboveOrBelow": {
+    "description": "One of view angle option",
+    "type": "text",
+    "placeholders": {}
+  },
+  "back": "Back",
+  "@back": {
+    "description": "One of view angle option",
+    "type": "text",
+    "placeholders": {}
+  },
+  "front": "Front",
+  "@front": {
+    "description": "One of view angle option",
+    "type": "text",
+    "placeholders": {}
+  },
+  "side": "Side",
+  "@side": {
+    "description": "One of view angle option",
+    "type": "text",
+    "placeholders": {}
+  },
+  "animal": "Animal",
+  "@animal": {
+    "description": "Animal image",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fullBody": "Full body",
+  "@fullBody": {
+    "description": "Full body image",
+    "type": "text",
+    "placeholders": {}
+  },
+  "bodyPart": "Body part",
+  "@bodyPart": {
+    "description": "Body part image",
+    "type": "text",
+    "placeholders": {}
+  },
+  "structure": "Structure",
+  "@structure": {
+    "description": "Structure image. For example, buildings.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "vegetation": "Vegetation",
+  "@vegetation": {
+    "description": "Vegetation image, consisted of fruits and plants",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sketchDailyReference": "SketchDaily reference",
+  "@sketchDailyReference": {
+    "description": "Means website \"SketchDaily reference\" or this application, Usually used as app title, or in About... page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "news": "News",
+  "@news": {
+    "description": "Means news from SketchDaily reference website",
+    "type": "text",
+    "placeholders": {}
+  },
+  "announcement": "Announcement",
+  "@announcement": {
+    "description": "Means announcments from SketchDaily",
+    "type": "text",
+    "placeholders": {}
+  },
+  "startDrawing": "Start Drawing!",
+  "@startDrawing": {
+    "description": "Button text of \"Start Drawing!\" button, visible in first app screen",
+    "type": "text",
+    "placeholders": {}
+  },
+  "wroteAt": "Wrote at {date}",
+  "@wroteAt": {
+    "description": "A bit smaller text on bottom of news article, with news date",
+    "type": "text",
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "doNotShowThisAgain": "Do not show this again",
+  "@doNotShowThisAgain": {
+    "description": "Checkbox label in announcement dialog",
+    "type": "text",
+    "placeholders": {}
+  },
+  "requestingNextImage": "Requesting Next Image...",
+  "@requestingNextImage": {
+    "description": "Displayed at elapsed(or remaining) time position when requesting next image information",
+    "type": "text",
+    "placeholders": {}
+  },
+  "downloadingImage": "Downloading image...",
+  "@downloadingImage": {
+    "description": "Displayed at elapsed(or remaining) time position when downloading next image",
+    "type": "text",
+    "placeholders": {}
+  },
+  "elapsedTimeInInfinityTimer": "{time} (Infinite)",
+  "@elapsedTimeInInfinityTimer": {
+    "description": "Elapsed time, but with infinity timer",
+    "type": "text",
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "infinityTimer": "Infinite",
+  "@infinityTimer": {
+    "description": "Infinity timer, displayed at elapsed(or remaining) time position, without elapsed time, only when \"Display elapsed time even with Infinity timer\" option is not enabled",
+    "type": "text",
+    "placeholders": {}
+  },
+  "goFirst": "First image",
+  "@goFirst": {
+    "description": "Tooltip of icon button to display first image",
+    "type": "text",
+    "placeholders": {}
+  },
+  "goPrev": "Previous image",
+  "@goPrev": {
+    "description": "Tooltip of icon button to display previous image",
+    "type": "text",
+    "placeholders": {}
+  },
+  "goNext": "Next image",
+  "@goNext": {
+    "description": "Tooltip of icon button to display next image, fetching new image when needed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "goLast": "Last image",
+  "@goLast": {
+    "description": "Tooltip of icon button to display last image",
+    "type": "text",
+    "placeholders": {}
+  },
+  "resume": "Resume",
+  "@resume": {
+    "description": "Tooltip of icon button to resume player",
+    "type": "text",
+    "placeholders": {}
+  },
+  "pause": "Pause",
+  "@pause": {
+    "description": "Tooltip of icon button to resume Player",
+    "type": "text",
+    "placeholders": {}
+  },
+  "openReportImageButton": "Report this image",
+  "@openReportImageButton": {
+    "description": "Text of menu item to report a image displayed in the player",
+    "type": "text",
+    "placeholders": {}
+  },
+  "imageInformation": "Image information",
+  "@imageInformation": {
+    "description": "Text of menu item to display information of current image of the player",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noMoreImages": "No more images",
+  "@noMoreImages": {
+    "description": "Error message when no more images are available with options given",
+    "type": "text",
+    "placeholders": {}
+  },
+  "preferences": "Preferences",
+  "@preferences": {
+    "description": "Application preferences",
+    "type": "text",
+    "placeholders": {}
+  },
+  "about": "About...",
+  "@about": {
+    "description": "Text of menu item to open app information page, this page includes author, github url, license, etc.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "inappopriate": "Inappopriate",
+  "@inappopriate": {
+    "description": "One of report types in Report image page, meaning an inappopriate image",
+    "type": "text",
+    "placeholders": {}
+  },
+  "copyrightViolation": "Copyright violation",
+  "@copyrightViolation": {
+    "description": "One of report types in Report image page, meaning an image violating copyright",
+    "type": "text",
+    "placeholders": {}
+  },
+  "lowQaulity": "Low qaulity",
+  "@lowQaulity": {
+    "description": "One of report types in Report image page, meaning a low quality image",
+    "type": "text",
+    "placeholders": {}
+  },
+  "wrongClassifications": "Wrong classifications",
+  "@wrongClassifications": {
+    "description": "One of report types in Report image page, meaning an image with wrong classifications",
+    "type": "text",
+    "placeholders": {}
+  },
+  "reportComment": "Comment",
+  "@reportComment": {
+    "description": "Comment when report an image",
+    "type": "text",
+    "placeholders": {}
+  },
+  "reportType": "Report type",
+  "@reportType": {
+    "description": "Required category when reporting an image",
+    "type": "text",
+    "placeholders": {}
+  },
+  "reportImageTitle": "Report image",
+  "@reportImageTitle": {
+    "description": "Title of report image page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "reportImageButton": "Report problem",
+  "@reportImageButton": {
+    "description": "Text of report button in report image page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutTitle": "About",
+  "@aboutTitle": {
+    "description": "Title of about page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "author": "Author",
+  "@author": {
+    "description": "Author of Sketchdaily reference website or this application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutSketchDailyReference": "About Sketchdaily reference",
+  "@aboutSketchDailyReference": {
+    "description": "Header row text in about page, on top of website author/url info",
+    "type": "text",
+    "placeholders": {}
+  },
+  "githubRepository": "GitHub Repository",
+  "@githubRepository": {
+    "description": "GitHub repository of this application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "appLicense": "License",
+  "@appLicense": {
+    "description": "License of this application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutApplication": "About Application",
+  "@aboutApplication": {
+    "description": "Header row text in about page, on top of applicatio author/github-repo/license info",
+    "type": "text",
+    "placeholders": {}
+  },
+  "gplNotice": "GNU General Public License version 3, or (at your option) any later version",
+  "@gplNotice": {
+    "description": "GPLv3+ License notice of this application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "referenceOptionsTitle": "Reference options",
+  "@referenceOptionsTitle": {
+    "description": "Reference options page title",
+    "type": "text",
+    "placeholders": {}
+  },
+  "timeInSeconds": "Time (in seconds)",
+  "@timeInSeconds": {
+    "description": "Label of time text field, in seconds",
+    "type": "text",
+    "placeholders": {}
+  },
+  "infiniteTimeCheckbox": "Infinite time",
+  "@infiniteTimeCheckbox": {
+    "description": "Label of infinity-timer checkbox",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loadingImageCount": "Loading image count...",
+  "@loadingImageCount": {
+    "description": "Text displayed instead of image count when loading",
+    "type": "text",
+    "placeholders": {}
+  },
+  "nImagesAvailable": "{count} images available",
+  "@nImagesAvailable": {
+    "description": "Available image count with options given",
+    "type": "text",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "clothing": "Clothing",
+  "@clothing": {
+    "description": "Clothed of nude?",
+    "type": "text",
+    "placeholders": {}
+  },
+  "nsfw": "NSFW",
+  "@nsfw": {
+    "description": "NSFW or not?",
+    "type": "text",
+    "placeholders": {}
+  },
+  "clothingAndNSFW": "Clothing and NSFW",
+  "@clothingAndNSFW": {
+    "description": "Header of clothing(clothed or nude?) and nsfw settings",
+    "type": "text",
+    "placeholders": {}
+  },
+  "clothed": "Clothed",
+  "@clothed": {
+    "description": "Clothed, another selection is Nude.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "nude": "Nude",
+  "@nude": {
+    "description": "Nlothed, another selection is Clothed.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "includeNSFWImages": "Include NSFW images",
+  "@includeNSFWImages": {
+    "description": "Label of checkbox to include NSFW images",
+    "type": "text",
+    "placeholders": {}
+  },
+  "pictureInformation": "Picture information",
+  "@pictureInformation": {
+    "description": "Title of picture info page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "personName": "Name",
+  "@personName": {
+    "description": "Name of a person, which is model or photographer",
+    "type": "text",
+    "placeholders": {}
+  },
+  "personWebpage": "Webpage",
+  "@personWebpage": {
+    "description": "Webpage of a person, which is model or photographer",
+    "type": "text",
+    "placeholders": {}
+  },
+  "imageClassification": "Image classification",
+  "@imageClassification": {
+    "description": "Image classification, displayed in picture info plage",
+    "type": "text",
+    "placeholders": {}
+  },
+  "imageIdAndUploadInformation": "Image id and upload information",
+  "@imageIdAndUploadInformation": {
+    "description": "Image id and other infos such as uploader, upload date, terms of use, source url",
+    "type": "text",
+    "placeholders": {}
+  },
+  "imageId": "Image id",
+  "@imageId": {
+    "description": "Image id",
+    "type": "text",
+    "placeholders": {}
+  },
+  "uploadedBy": "Uploaded by",
+  "@uploadedBy": {
+    "description": "Used for displaying uploader nickname",
+    "type": "text",
+    "placeholders": {}
+  },
+  "uploadedAt": "Uploaded at",
+  "@uploadedAt": {
+    "description": "Used for displaying upload date",
+    "type": "text",
+    "placeholders": {}
+  },
+  "termsOfUse": "Terms of Use",
+  "@termsOfUse": {
+    "description": "Image terms of use",
+    "type": "text",
+    "placeholders": {}
+  },
+  "imageSourceUrl": "Source url",
+  "@imageSourceUrl": {
+    "description": "Image source url",
+    "type": "text",
+    "placeholders": {}
+  },
+  "photographer": "Photographer",
+  "@photographer": {
+    "description": "Image photographer",
+    "type": "text",
+    "placeholders": {}
+  },
+  "model": "Model",
+  "@model": {
+    "description": "Image model, usually visible in Full body or Body part pictures",
+    "type": "text",
+    "placeholders": {}
+  },
+  "empty": "(Empty)",
+  "@empty": {
+    "description": "Used when terms of use or source uri is empty",
+    "type": "text",
+    "placeholders": {}
+  },
+  "skipNewsPageWhenNoMoreLatestNews": "Skip news page when there's no new news",
+  "@skipNewsPageWhenNoMoreLatestNews": {
+    "description": "Boolean-type app preference",
+    "type": "text",
+    "placeholders": {}
+  },
+  "newsAndAnnouncementsPreferences": "News and announcements",
+  "@newsAndAnnouncementsPreferences": {
+    "description": "Preferences about news page and announcements",
+    "type": "text",
+    "placeholders": {}
+  },
+  "referenceOptionsPreferences": "Reference options",
+  "@referenceOptionsPreferences": {
+    "description": "Preferences on reference options",
+    "type": "text",
+    "placeholders": {}
+  },
+  "playerOptions": "Player options",
+  "@playerOptions": {
+    "description": "Preferences on image player",
+    "type": "text",
+    "placeholders": {}
+  },
+  "clearDrawingOptions": "Clear drawing options",
+  "@clearDrawingOptions": {
+    "description": "void-type app preference",
+    "type": "text",
+    "placeholders": {}
+  },
+  "clearDrawingOptionsDescription": "Clear drawing options saved, such as Species(Animal) or gender(Full body / Body part)",
+  "@clearDrawingOptionsDescription": {
+    "description": "void-type app preference",
+    "type": "text",
+    "placeholders": {}
+  },
+  "clearTimeValues": "Clear time values",
+  "@clearTimeValues": {
+    "description": "void-type app preference",
+    "type": "text",
+    "placeholders": {}
+  },
+  "clearTimeValuesDescription": "Clear time values and whether It's infinity or not in drawing options",
+  "@clearTimeValuesDescription": {
+    "description": "void-type app preference",
+    "type": "text",
+    "placeholders": {}
+  },
+  "displayElapsedTimeWithInfinityTimer": "Display elapsed time when infinite time is enabled",
+  "@displayElapsedTimeWithInfinityTimer": {
+    "description": "boolean-type app preference",
+    "type": "text",
+    "placeholders": {}
+  },
+  "displayElapsedTimeWithInfinityTimerDescription": "Display elapsed time, in format of \"??:?? (Infinite)\", when infinite time is enabled",
+  "@displayElapsedTimeWithInfinityTimerDescription": {
+    "description": "boolean-type app preference",
+    "type": "text",
+    "placeholders": {}
+  },
+  "displayElapsedTime": "Display elapsed time",
+  "@displayElapsedTime": {
+    "description": "boolean-type app preference",
+    "type": "text",
+    "placeholders": {}
+  },
+  "displayElapsedTimeDescription": "Display elapsed time instead of remaining time",
+  "@displayElapsedTimeDescription": {
+    "description": "boolean-type app preference",
+    "type": "text",
+    "placeholders": {}
+  },
+  "clearImageCache": "Clear image cache",
+  "@clearImageCache": {
+    "description": "void-type app preference",
+    "type": "text",
+    "placeholders": {}
+  },
+  "clearImageCacheDescription": "Maybe useful when device storage is near full",
+  "@clearImageCacheDescription": {
+    "description": "void-type app preference",
+    "type": "text",
+    "placeholders": {}
+  },
+  "animalSpecies": "Species",
+  "@animalSpecies": {
+    "description": "Animal species, such as birds or fishes",
+    "type": "text",
+    "placeholders": {}
+  },
+  "bird": "Bird",
+  "@bird": {
+    "description": "One of animal species",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fish": "Fish",
+  "@fish": {
+    "description": "One of animal species",
+    "type": "text",
+    "placeholders": {}
+  },
+  "reptileOrAmphibian": "Reptile Or Amphibian",
+  "@reptileOrAmphibian": {
+    "description": "One of animal species",
+    "type": "text",
+    "placeholders": {}
+  },
+  "bug": "Bug",
+  "@bug": {
+    "description": "One of animal species",
+    "type": "text",
+    "placeholders": {}
+  },
+  "mammal": "Mammal",
+  "@mammal": {
+    "description": "One of animal species",
+    "type": "text",
+    "placeholders": {}
+  },
+  "animalCategory": "Category",
+  "@animalCategory": {
+    "description": "Animal category, such as living or dead",
+    "type": "text",
+    "placeholders": {}
+  },
+  "livingAnimal": "Living",
+  "@livingAnimal": {
+    "description": "One of animal category",
+    "type": "text",
+    "placeholders": {}
+  },
+  "animalSkeletonOrBones": "Skeleton or bones",
+  "@animalSkeletonOrBones": {
+    "description": "One of animal category",
+    "type": "text",
+    "placeholders": {}
+  },
+  "bodyPartType": "Body part",
+  "@bodyPartType": {
+    "description": "Body part types, such as foot, head, hand.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "foot": "Foot",
+  "@foot": {
+    "description": "One of body part type",
+    "type": "text",
+    "placeholders": {}
+  },
+  "head": "Head",
+  "@head": {
+    "description": "One of body part type",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hand": "Hand",
+  "@hand": {
+    "description": "One of body part type",
+    "type": "text",
+    "placeholders": {}
+  },
+  "poseType": "Pose type",
+  "@poseType": {
+    "description": "Pose type, such as action or stationary",
+    "type": "text",
+    "placeholders": {}
+  },
+  "actionPose": "Action",
+  "@actionPose": {
+    "description": "One of pose types",
+    "type": "text",
+    "placeholders": {}
+  },
+  "stationaryPose": "Stationary",
+  "@stationaryPose": {
+    "description": "One of pose types",
+    "type": "text",
+    "placeholders": {}
+  },
+  "structureType": "Type",
+  "@structureType": {
+    "description": "Structure type, such as building or house",
+    "type": "text",
+    "placeholders": {}
+  },
+  "building": "Building",
+  "@building": {
+    "description": "One of structure types",
+    "type": "text",
+    "placeholders": {}
+  },
+  "house": "House",
+  "@house": {
+    "description": "One of structure types",
+    "type": "text",
+    "placeholders": {}
+  },
+  "vegetationType": "Vegetation type",
+  "@vegetationType": {
+    "description": "Vegetation types, such as flowers and plants",
+    "type": "text",
+    "placeholders": {}
+  },
+  "flower": "Flower",
+  "@flower": {
+    "description": "One of vegetation types",
+    "type": "text",
+    "placeholders": {}
+  },
+  "plant": "Plant",
+  "@plant": {
+    "description": "One of vegetation types",
+    "type": "text",
+    "placeholders": {}
+  },
+  "vegetationPhotoType": "Photo type",
+  "@vegetationPhotoType": {
+    "description": "Vegetation photo types, such as closeup and full",
+    "type": "text",
+    "placeholders": {}
+  },
+  "closeup": "Closeup",
+  "@closeup": {
+    "description": "One of vegetation photo types",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fullVegetationPhotoType": "Full",
+  "@fullVegetationPhotoType": {
+    "description": "One of vegetation photo types",
+    "type": "text",
+    "placeholders": {}
+  }
+}
