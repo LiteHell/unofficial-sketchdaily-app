@@ -65,14 +65,15 @@ void main() {
       final tabBarFinder =
           find.byKey(const ValueKey('drawing-options-tab-bar'));
       final tabBarCenter = tester.getCenter(tabBarFinder);
-
-      for (final i in const [
+      const tabNames = [
         'Full body',
         'Body part',
         'Animal',
         'Structure',
         'Vegetation'
-      ]) {
+      ];
+
+      for (final i in tabNames) {
         final itemFinder = find.text(i);
         while (itemFinder.evaluate().isEmpty) {
           await tester.dragFrom(tabBarCenter, const Offset(3.0, 0.0));
