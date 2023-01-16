@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sketchdaily/i18n/messages.dart';
-import 'package:sketchdaily/pages/perferences_page.dart';
+import 'package:sketchdaily/pages/preferences_page.dart';
 
 import '../pages/about_page.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sketchdaily/i18n/messages.dart';
-import 'package:sketchdaily/pages/drawing_options.dart';
+import 'package:sketchdaily/pages/reference_options.dart';
 import 'package:sketchdaily/widgets/announcements.dart';
 import 'package:sketchdaily/widgets/customized_popup_menu.dart';
 
@@ -23,7 +23,7 @@ class MainPage extends StatelessWidget {
               label: Text(Messages.startDrawing),
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const DrawingOptions()));
+                    builder: (context) => const ReferenceOptions()));
               }),
         )
       ]),

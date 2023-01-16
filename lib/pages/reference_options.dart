@@ -17,14 +17,14 @@ import '../widgets/drawing_option/full_body_drawing_options.dart';
 import '../widgets/drawing_option/structure_drawing_options.dart';
 import '../widgets/drawing_option/vegetation_drawing_options.dart';
 
-class DrawingOptions extends StatefulWidget {
-  const DrawingOptions({super.key});
+class ReferenceOptions extends StatefulWidget {
+  const ReferenceOptions({super.key});
 
   @override
-  State<DrawingOptions> createState() => _DrawingOptionsState();
+  State<ReferenceOptions> createState() => _ReferenceOptionsState();
 }
 
-class _DrawingOptionsState extends State<DrawingOptions> {
+class _ReferenceOptionsState extends State<ReferenceOptions> {
   OptionContainer options = OptionContainer();
   final List<bool> _isInfiniteTimes = [false, false, false, false, false];
   final List<int?> _imageCounts = [null, null, null, null, null];
@@ -36,7 +36,7 @@ class _DrawingOptionsState extends State<DrawingOptions> {
     TextEditingController(text: '5')
   ];
 
-  _DrawingOptionsState() : super() {
+  _ReferenceOptionsState() : super() {
     attachTextControllerListener();
     loadOptionsFromPreferences().then((value) async {
       await getAllImageCount();

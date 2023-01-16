@@ -26,7 +26,7 @@ String _getImageCategoryString(ImageType type) {
   }
 }
 
-Future<void> ReportImage(String imageId,
+Future<void> reportImage(String imageId,
     {required ImageReportType reportType,
     required String comment,
     required ImageType type}) async {

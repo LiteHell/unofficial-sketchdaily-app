@@ -7,7 +7,7 @@ import 'package:sketchdaily/sketchdaily_api/news/announcement.dart';
 import 'package:sketchdaily/sketchdaily_api/news/news.dart';
 import 'package:sketchdaily/widgets/announcement_dialog.dart';
 
-import '../pages/drawing_options.dart';
+import '../pages/reference_options.dart';
 
 class Announcements extends StatefulWidget {
   const Announcements({super.key});
@@ -33,7 +33,7 @@ class _AnnouncementsState extends State<Announcements> {
 
     if (await AppPreferences.isReadNews(news.first.id)) {
       navigator.push(
-          MaterialPageRoute(builder: (context) => const DrawingOptions()));
+          MaterialPageRoute(builder: (context) => const ReferenceOptions()));
     } else {
       await AppPreferences.markNewsRead(news.first.id);
     }

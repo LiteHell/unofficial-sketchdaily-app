@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:sketchdaily/i18n/messages.dart';
 import 'package:sketchdaily/sketchdaily_api/report_image.dart';
 
@@ -64,7 +63,7 @@ class _ReportImagePageState extends State<ReportImagePage> {
             ),
             ElevatedButton.icon(
                 onPressed: () async {
-                  await ReportImage(widget.imageId,
+                  await reportImage(widget.imageId,
                       reportType: reportType,
                       comment: controller.text,
                       type: widget.imageType);
@@ -73,10 +72,10 @@ class _ReportImagePageState extends State<ReportImagePage> {
                     Navigator.of(context).pop();
                   }
                 },
-                icon: Icon(Icons.report_problem_outlined),
+                icon: const Icon(Icons.report_problem_outlined),
                 label: Text(Messages.reportImageButton))
           ]
-              .map((i) => Padding(child: i, padding: const EdgeInsets.all(10)))
+              .map((i) => Padding(padding: const EdgeInsets.all(10), child: i))
               .toList()),
     );
   }

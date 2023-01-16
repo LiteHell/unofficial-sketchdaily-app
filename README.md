@@ -27,8 +27,8 @@ Currently, this app is targeting Android only.
 1. Run `flutter pub run intl_translation:extract_to_arb --output-dir=assets/i18n lib/i18n/messages.dart`
 1. Copy `assets/i18n/intl_messages.arb` to `assets/i18n/intl_[locale-code].arb`. For example, `asset/i18n/intl_ko.arb` for korean.
 1. If you're adding new language, Add new locale in these fields and methods.
-  - `supportedLocales` property in lib/main.dart
-  - `isSupported` method of `AppLocalizationDelegate` class in lib/i18n/localizations.dart
+    - `supportedLocales` property in lib/main.dart
+    - `isSupported` method of `AppLocalizationDelegate` class in lib/i18n/localizations.dart
 1. Build and test
 
 ## License
