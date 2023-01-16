@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sketchdaily/app_preferences.dart';
 import 'package:sketchdaily/pages/picture_page.dart';
+import 'package:sketchdaily/sketchdaily_api/animal/animal.dart';
+import 'package:sketchdaily/sketchdaily_api/body_part/body_part.dart';
+import 'package:sketchdaily/sketchdaily_api/full_body/full_body.dart';
 import 'package:sketchdaily/sketchdaily_api/picture_options.dart';
+import 'package:sketchdaily/sketchdaily_api/structure/structure.dart';
+import 'package:sketchdaily/sketchdaily_api/vegetation/vegetation.dart';
 import 'package:sketchdaily/widgets/drawing_option/animal_drawing_options.dart';
 
 import '../option_container.dart';
@@ -21,6 +26,7 @@ class DrawingOptions extends StatefulWidget {
 class _DrawingOptionsState extends State<DrawingOptions> {
   OptionContainer options = OptionContainer();
   final List<bool> _isInfiniteTimes = [false, false, false, false, false];
+  final List<int?> _imageCounts = [null, null, null, null, null];
   final List<TextEditingController> _controllers = [
     TextEditingController(text: '5'),
     TextEditingController(text: '5'),
@@ -30,8 +36,27 @@ class _DrawingOptionsState extends State<DrawingOptions> {
   ];
 
   _DrawingOptionsState() : super() {
-    loadOptionsFromPreferences();
     attachTextControllerListener();
+    loadOptionsFromPreferences().then((value) async {
+      await getAllImageCount();
+    });
+  }
+
+  Future<void> getAllImageCount() async {
+    final newImageCounts = [
+      await FullBody.count(options.fullBody),
+      await BodyPart.count(options.bodyPart),
+      await Animal.count(options.animal),
+      await Structure.count(options.structure),
+      await Vegetation.count(options.vegetation)
+    ];
+    if (mounted) {
+      setState(() {
+        for (var i = 0; i < 5; i++) {
+          _imageCounts[i] = newImageCounts[i];
+        }
+      });
+    }
   }
 
   void attachTextControllerListener() {
@@ -45,7 +70,7 @@ class _DrawingOptionsState extends State<DrawingOptions> {
     }
   }
 
-  void loadOptionsFromPreferences() async {
+  Future<void> loadOptionsFromPreferences() async {
     OptionContainer optionsLoaded = await AppPreferences.readPictureOptions();
     List<int> times = [5, 5, 5, 5, 5];
     List<bool> isInfiniteTimes = [false, false, false, false, false];
@@ -123,6 +148,11 @@ class _DrawingOptionsState extends State<DrawingOptions> {
                 const Text('Infinite time'),
               ]),
               Center(
+                child: Text(_imageCounts[tabIndex] == null
+                    ? 'Loading image count...'
+                    : '${_imageCounts[tabIndex]} images available'),
+              ),
+              Center(
                   child: ElevatedButton.icon(
                       onPressed: onStartPreseed,
                       icon: const Icon(Icons.play_arrow),
@@ -134,11 +164,16 @@ class _DrawingOptionsState extends State<DrawingOptions> {
     return createOptionsTabPage(
         optionsWidget: AnimalDrawingOptions(
           options: options.animal,
-          onChanged: (e) {
-            setState(() {
-              options.animal = e;
-              saveOptionsToPreferences();
-            });
+          onChanged: (e) async {
+            final newCount = await Animal.count(e);
+
+            if (mounted) {
+              setState(() {
+                options.animal = e;
+                _imageCounts[tabIndex] = newCount;
+                saveOptionsToPreferences();
+              });
+            }
           },
         ),
         onStartPreseed: () {
@@ -151,11 +186,16 @@ class _DrawingOptionsState extends State<DrawingOptions> {
     return createOptionsTabPage(
         optionsWidget: FullBodyDrawingOptions(
           options: options.fullBody,
-          onChanged: (e) {
-            setState(() {
-              options.fullBody = e;
-              saveOptionsToPreferences();
-            });
+          onChanged: (e) async {
+            final newCount = await FullBody.count(e);
+
+            if (mounted) {
+              setState(() {
+                options.fullBody = e;
+                _imageCounts[tabIndex] = newCount;
+                saveOptionsToPreferences();
+              });
+            }
           },
         ),
         onStartPreseed: () {
@@ -168,11 +208,16 @@ class _DrawingOptionsState extends State<DrawingOptions> {
     return createOptionsTabPage(
         optionsWidget: BodyPartDrawingOptions(
           options: options.bodyPart,
-          onChanged: (e) {
-            setState(() {
-              options.bodyPart = e;
-              saveOptionsToPreferences();
-            });
+          onChanged: (e) async {
+            final newCount = await BodyPart.count(e);
+
+            if (mounted) {
+              setState(() {
+                options.bodyPart = e;
+                _imageCounts[tabIndex] = newCount;
+                saveOptionsToPreferences();
+              });
+            }
           },
         ),
         onStartPreseed: () {
@@ -185,11 +230,16 @@ class _DrawingOptionsState extends State<DrawingOptions> {
     return createOptionsTabPage(
         optionsWidget: VegetationDrawingOptions(
           options: options.vegetation,
-          onChanged: (e) {
-            setState(() {
-              options.vegetation = e;
-              saveOptionsToPreferences();
-            });
+          onChanged: (e) async {
+            final newCount = await Vegetation.count(e);
+
+            if (mounted) {
+              setState(() {
+                options.vegetation = e;
+                _imageCounts[tabIndex] = newCount;
+                saveOptionsToPreferences();
+              });
+            }
           },
         ),
         onStartPreseed: () {
@@ -202,11 +252,16 @@ class _DrawingOptionsState extends State<DrawingOptions> {
     return createOptionsTabPage(
         optionsWidget: StructureDrawingOptions(
           options: options.structure,
-          onChanged: (e) {
-            setState(() {
-              options.structure = e;
-              saveOptionsToPreferences();
-            });
+          onChanged: (e) async {
+            final newCount = await Structure.count(e);
+
+            if (mounted) {
+              setState(() {
+                options.structure = e;
+                _imageCounts[tabIndex] = newCount;
+                saveOptionsToPreferences();
+              });
+            }
           },
         ),
         onStartPreseed: () {
@@ -224,23 +279,26 @@ class _DrawingOptionsState extends State<DrawingOptions> {
             appBar: AppBar(
               title: const Text('Drawing options'),
               actions: const [CustomizedPopupMenu()],
-              bottom: const TabBar(isScrollable: true, tabs: <Widget>[
-                Tab(
-                  text: 'Full body',
-                ),
-                Tab(
-                  text: 'Body part',
-                ),
-                Tab(
-                  text: 'Animal',
-                ),
-                Tab(
-                  text: 'Structure',
-                ),
-                Tab(
-                  text: 'Vegetation',
-                )
-              ]),
+              bottom: const TabBar(
+                  isScrollable: true,
+                  key: Key('drawing-options-tab-bar'),
+                  tabs: <Widget>[
+                    Tab(
+                      text: 'Full body',
+                    ),
+                    Tab(
+                      text: 'Body part',
+                    ),
+                    Tab(
+                      text: 'Animal',
+                    ),
+                    Tab(
+                      text: 'Structure',
+                    ),
+                    Tab(
+                      text: 'Vegetation',
+                    )
+                  ]),
             ),
             //drawer: drawingsDrawer(context),
             body: TabBarView(children: [
