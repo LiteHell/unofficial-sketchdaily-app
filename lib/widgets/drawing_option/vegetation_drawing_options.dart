@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sketchdaily/enum_i18n.dart';
+import 'package:sketchdaily/i18n/messages.dart';
 import 'package:sketchdaily/sketchdaily_api/vegetation/vegetation_option.dart';
 import 'package:sketchdaily/widgets/buttons/choice_chips.dart';
 
@@ -16,12 +18,10 @@ class VegetationDrawingOptions extends StatelessWidget {
           onChanged(
               VegetationOption(photoType: options.photoType, type: newType));
         },
-        values: const [
-          ChoiceChipValueDescription(value: null, description: "All"),
-          ChoiceChipValueDescription(
-              value: VegetationType.flowers, description: "Flowers"),
-          ChoiceChipValueDescription(
-              value: VegetationType.plants, description: "Plants"),
+        values: [
+          ChoiceChipValueDescription(value: null, description: Messages.all),
+          ...VegetationType.values.map((i) =>
+              ChoiceChipValueDescription(value: i, description: enumI18n(i)))
         ]);
   }
 
@@ -32,12 +32,10 @@ class VegetationDrawingOptions extends StatelessWidget {
           onChanged(
               VegetationOption(photoType: newPhotoType, type: options.type));
         },
-        values: const [
-          ChoiceChipValueDescription(value: null, description: "All"),
-          ChoiceChipValueDescription(
-              value: VegetationPhotoType.closeup, description: "Closeup"),
-          ChoiceChipValueDescription(
-              value: VegetationPhotoType.full, description: "Full"),
+        values: [
+          ChoiceChipValueDescription(value: null, description: Messages.all),
+          ...VegetationPhotoType.values.map((i) =>
+              ChoiceChipValueDescription(value: i, description: enumI18n(i))),
         ]);
   }
 
@@ -46,9 +44,9 @@ class VegetationDrawingOptions extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Vegetation type'),
+        Text(Messages.vegetationType),
         _typeChips(),
-        const Text('Photo type'),
+        Text(Messages.vegetationPhotoType),
         _photoTypeChips(),
       ],
     );

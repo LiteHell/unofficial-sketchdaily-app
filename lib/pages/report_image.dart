@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:sketchdaily/i18n/messages.dart';
 import 'package:sketchdaily/sketchdaily_api/report_image.dart';
 
 class ReportImagePage extends StatefulWidget {
@@ -19,33 +20,33 @@ class _ReportImagePageState extends State<ReportImagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Report image')),
+      appBar: AppBar(title: Text(Messages.reportImageTitle)),
       body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Report type'),
+            Text(Messages.reportType),
             DropdownButton(
                 value: reportType,
-                items: const [
+                items: [
                   DropdownMenuItem(
                     value: ImageReportType.inappropriate,
-                    child: Text('Inappopriate'),
+                    child: Text(Messages.inappopriate),
                   ),
                   DropdownMenuItem(
                     value: ImageReportType.copyrightViolation,
-                    child: Text('Copyright violation'),
+                    child: Text(Messages.copyrightViolation),
                   ),
                   DropdownMenuItem(
                     value: ImageReportType.lowQuality,
-                    child: Text('Low qaulity'),
+                    child: Text(Messages.lowQaulity),
                   ),
                   DropdownMenuItem(
                     value: ImageReportType.wrongClassifications,
-                    child: Text('Wrong classifications'),
+                    child: Text(Messages.wrongClassifications),
                   ),
                   DropdownMenuItem(
                     value: ImageReportType.other,
-                    child: Text('Other'),
+                    child: Text(Messages.other),
                   ),
                 ],
                 onChanged: ((value) {
@@ -55,7 +56,7 @@ class _ReportImagePageState extends State<ReportImagePage> {
                     });
                   }
                 })),
-            const Text('Comment'),
+            Text(Messages.reportComment),
             TextField(
               keyboardType: TextInputType.multiline,
               maxLines: null,
@@ -73,7 +74,7 @@ class _ReportImagePageState extends State<ReportImagePage> {
                   }
                 },
                 icon: Icon(Icons.report_problem_outlined),
-                label: const Text('Report problem'))
+                label: Text(Messages.reportImageButton))
           ]
               .map((i) => Padding(child: i, padding: const EdgeInsets.all(10)))
               .toList()),

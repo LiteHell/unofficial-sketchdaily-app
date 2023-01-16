@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sketchdaily/app_preferences.dart';
+import 'package:sketchdaily/i18n/messages.dart';
 import 'package:sketchdaily/pages/picture_page.dart';
 import 'package:sketchdaily/sketchdaily_api/animal/animal.dart';
 import 'package:sketchdaily/sketchdaily_api/body_part/body_part.dart';
@@ -119,7 +120,7 @@ class _DrawingOptionsState extends State<DrawingOptions> {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               optionsWidget,
-              const Text('Time (in seconds)'),
+              Text(Messages.timeInSeconds),
               TextField(
                   controller: _controllers[tabIndex],
                   keyboardType: TextInputType.number,
@@ -145,18 +146,19 @@ class _DrawingOptionsState extends State<DrawingOptions> {
                         });
                       }
                     }),
-                const Text('Infinite time'),
+                Text(Messages.infiniteTimeCheckbox),
               ]),
               Center(
                 child: Text(_imageCounts[tabIndex] == null
-                    ? 'Loading image count...'
-                    : '${_imageCounts[tabIndex]} images available'),
+                    ? Messages.loadingImageCount
+                    : Messages.nImagesAvailable(
+                        _imageCounts[tabIndex]?.toString() ?? '??')),
               ),
               Center(
                   child: ElevatedButton.icon(
                       onPressed: onStartPreseed,
                       icon: const Icon(Icons.play_arrow),
-                      label: const Text('Start')))
+                      label: Text(Messages.start)))
             ])));
   }
 
@@ -277,26 +279,26 @@ class _DrawingOptionsState extends State<DrawingOptions> {
         initialIndex: 0,
         child: Scaffold(
             appBar: AppBar(
-              title: const Text('Drawing options'),
+              title: Text(Messages.referenceOptionsTitle),
               actions: const [CustomizedPopupMenu()],
-              bottom: const TabBar(
+              bottom: TabBar(
                   isScrollable: true,
-                  key: Key('drawing-options-tab-bar'),
+                  key: const Key('drawing-options-tab-bar'),
                   tabs: <Widget>[
                     Tab(
-                      text: 'Full body',
+                      text: Messages.fullBody,
                     ),
                     Tab(
-                      text: 'Body part',
+                      text: Messages.bodyPart,
                     ),
                     Tab(
-                      text: 'Animal',
+                      text: Messages.animal,
                     ),
                     Tab(
-                      text: 'Structure',
+                      text: Messages.structure,
                     ),
                     Tab(
-                      text: 'Vegetation',
+                      text: Messages.vegetation,
                     )
                   ]),
             ),

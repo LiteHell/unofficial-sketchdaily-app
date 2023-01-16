@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sketchdaily/i18n/messages.dart';
 import 'package:sketchdaily/pages/perferences_page.dart';
 
 import '../pages/about_page.dart';
@@ -18,14 +19,14 @@ class CustomizedPopupMenu extends StatelessWidget {
               if (additionalMenus.isNotEmpty) ...additionalMenus,
               if (additionalMenus.isNotEmpty) const PopupMenuDivider(),
               PopupMenuItem(
-                child: const Text('Preferences'),
+                child: Text(Messages.preferences),
                 value: () {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => const PreferencesPage()));
                 },
               ),
               PopupMenuItem(
-                child: const Text('About...'),
+                child: Text(Messages.about),
                 value: () {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => const AboutPage()));

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:sketchdaily/i18n/messages.dart';
 import 'package:sketchdaily/pages/main_page.dart';
+
+import 'i18n/localizations.dart';
 
 void main() {
   runApp(const SketchDailyReferenceApp());
@@ -12,7 +16,7 @@ class SketchDailyReferenceApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'SketchDaily reference',
+      title: Messages.sketchDailyReference,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -25,6 +29,13 @@ class SketchDailyReferenceApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
+      localizationsDelegates: [
+        AppLocalizationDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [Locale("en"), Locale("ko")],
       home: const MainPage(),
     );
   }

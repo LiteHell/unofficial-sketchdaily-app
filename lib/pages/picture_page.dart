@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sketchdaily/app_preferences.dart';
+import 'package:sketchdaily/i18n/messages.dart';
 import 'package:sketchdaily/pages/picture_info.dart';
 import 'package:sketchdaily/pages/report_image.dart';
 import 'package:sketchdaily/sketchdaily_api/animal/animal.dart';
@@ -77,15 +78,15 @@ class _PicturePageState extends State<PicturePage> {
 
   String getTitle() {
     if (widget.options is AnimalOption) {
-      return "Animal";
+      return Messages.animal;
     } else if (widget.options is FullBodyOption) {
-      return "Full body";
+      return Messages.fullBody;
     } else if (widget.options is BodyPartOption) {
-      return "Body part";
+      return Messages.bodyPart;
     } else if (widget.options is VegetationOption) {
-      return "Vegetation";
+      return Messages.vegetation;
     } else if (widget.options is StructureOption) {
-      return "Structure";
+      return Messages.structure;
     }
     throw Exception('None of known AnimalOption child classes');
   }
@@ -125,7 +126,7 @@ class _PicturePageState extends State<PicturePage> {
                         ))));
               },
               icon: const Icon(Icons.report_problem_outlined),
-              tooltip: 'Report problem',
+              tooltip: Messages.openReportImageButton,
             ),
             IconButton(
               onPressed: () {
@@ -136,7 +137,7 @@ class _PicturePageState extends State<PicturePage> {
                     builder: ((context) => PictureInfo(image: image))));
               },
               icon: const Icon(Icons.info),
-              tooltip: 'Image information',
+              tooltip: Messages.imageInformation,
             )
           ],
         ),

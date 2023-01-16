@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sketchdaily/app_preferences.dart';
+import 'package:sketchdaily/i18n/messages.dart';
 import 'package:sketchdaily/widgets/get_cached_image.dart';
 
 class PreferencesPage extends StatefulWidget {
@@ -64,24 +65,22 @@ class _PreferencesPageState extends State<PreferencesPage> {
             await readPreferences();
           },
           value: skipNewsPage,
-          title: "Skip news page when there's no new news")
+          title: Messages.skipNewsPageWhenNoMoreLatestNews)
     ];
   }
 
   Iterable<Widget> drawingOptionsSettings() {
     return [
       ListTile(
-        title: const Text('Clear drawing options'),
-        subtitle: const Text(
-            'Clear drawing options saved, such as Species(Animal) or gender(Full body / Body part)'),
+        title: Text(Messages.clearDrawingOptions),
+        subtitle: Text(Messages.clearDrawingOptionsDescription),
         onTap: () async {
           await AppPreferences.clearPictureOptions();
         },
       ),
       ListTile(
-        title: const Text('Clear time values'),
-        subtitle: const Text(
-            'Clear time values and whether It\'s infinity or not in drawing options'),
+        title: Text(Messages.clearTimeValues),
+        subtitle: Text(Messages.clearTimeValuesDescription),
         onTap: () async {
           for (var i = 0; i < 5; i++) {
             await AppPreferences.clearDrawingTimeOptionFor(i);
@@ -95,9 +94,8 @@ class _PreferencesPageState extends State<PreferencesPage> {
     bool displayTimeLeft = this.displayTimeLeft ?? true;
     return [
       checkboxListTile(
-        title: 'Display elapsed time even in infinite time',
-        subtitle:
-            'Display elapsed time even when it\'s infinite time, in format of "??:?? (Infinite)"',
+        title: Messages.displayElapsedTimeWithInfinityTimer,
+        subtitle: Messages.displayElapsedTimeWithInfinityTimerDescription,
         value: displayElapsedTimeOnInfinite,
         onChanged: (value) async {
           if (value == null) return;
@@ -107,9 +105,8 @@ class _PreferencesPageState extends State<PreferencesPage> {
         },
       ),
       checkboxListTile(
-        title: 'Display elapsed time instead of remaining time',
-        subtitle:
-            'Display elapsed time instead of remaining time when time is not set to infinite"',
+        title: Messages.displayElapsedTime,
+        subtitle: Messages.displayElapsedTimeDescription,
         value: !displayTimeLeft,
         onChanged: (value) async {
           if (value == null) return;
@@ -119,7 +116,8 @@ class _PreferencesPageState extends State<PreferencesPage> {
         },
       ),
       ListTile(
-          title: const Text('Clear image cache'),
+          title: Text(Messages.clearImageCache),
+          subtitle: Text(Messages.clearImageCacheDescription),
           onTap: () async {
             await clearCache();
           })
@@ -141,16 +139,16 @@ class _PreferencesPageState extends State<PreferencesPage> {
 
     readPreferences();
     final items = [
-      headerListTile('News and announcements'),
+      headerListTile(Messages.newsAndAnnouncementsPreferences),
       ...newsAndAnnouncementSettings(),
-      headerListTile('Drawing options'),
+      headerListTile(Messages.referenceOptionsPreferences),
       ...drawingOptionsSettings(),
-      headerListTile('Player options'),
+      headerListTile(Messages.playerOptions),
       ...picturePlayerSettings()
     ];
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Preferences')),
+      appBar: AppBar(title: Text(Messages.preferences)),
       body: ListView.separated(
           itemBuilder: (context, index) => items[index],
           separatorBuilder: (context, count) => const Divider(),

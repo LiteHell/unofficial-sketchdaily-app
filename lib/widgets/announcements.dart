@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:sketchdaily/app_preferences.dart';
+import 'package:sketchdaily/i18n/messages.dart';
 import 'package:sketchdaily/sketchdaily_api/news/announcement.dart';
 import 'package:sketchdaily/sketchdaily_api/news/news.dart';
 import 'package:sketchdaily/widgets/announcement_dialog.dart';
@@ -89,7 +90,7 @@ class _AnnouncementsState extends State<Announcements> {
           height: 3,
         ),
         HtmlWidget(news.content),
-        Text('Wrote at ${news.date.toString()}',
+        Text(Messages.wroteAt(news.date.toString()),
             textScaleFactor: 0.55,
             style: const TextStyle(color: Color.fromARGB(255, 96, 96, 96)))
       ]),

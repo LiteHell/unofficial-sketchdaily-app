@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sketchdaily/enum_i18n.dart';
+import 'package:sketchdaily/i18n/messages.dart';
 import 'package:sketchdaily/sketchdaily_api/body_part/body_part_option.dart';
 import 'package:sketchdaily/widgets/buttons/choice_chips.dart';
 import 'package:sketchdaily/widgets/buttons/gender_button.dart';
@@ -20,14 +22,10 @@ class BodyPartDrawingOptions extends StatelessWidget {
               gender: options.gender,
               viewAngle: options.viewAngle));
         },
-        values: const [
-          ChoiceChipValueDescription(value: null, description: "All"),
-          ChoiceChipValueDescription(
-              value: BodyPartType.foot, description: "Foot"),
-          ChoiceChipValueDescription(
-              value: BodyPartType.head, description: "Head"),
-          ChoiceChipValueDescription(
-              value: BodyPartType.hand, description: "Hand")
+        values: [
+          ChoiceChipValueDescription(value: null, description: Messages.all),
+          ...BodyPartType.values.map((i) =>
+              ChoiceChipValueDescription(value: i, description: enumI18n(i))),
         ]);
   }
 
@@ -36,9 +34,9 @@ class BodyPartDrawingOptions extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Body Part'),
+        Text(Messages.bodyPart),
         _bodyPartChips(),
-        const Text('Gender'),
+        Text(Messages.gender),
         GenderButton(
             value: options.gender,
             onChanged: (newGender) {
@@ -47,7 +45,7 @@ class BodyPartDrawingOptions extends StatelessWidget {
                   gender: newGender,
                   viewAngle: options.viewAngle));
             }),
-        const Text('View Angle'),
+        Text(Messages.viewAngle),
         ViewAngleButton(
             value: options.viewAngle,
             onChanged: (newViewAngle) {

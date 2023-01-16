@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sketchdaily/app_preferences.dart';
+import 'package:sketchdaily/i18n/messages.dart';
 import 'package:sketchdaily/sketchdaily_api/news/announcement.dart';
 
 class AnnouncementDialog extends StatefulWidget {
@@ -16,7 +17,7 @@ class _AnnouncementDialogState extends State<AnnouncementDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-        title: const Text('Announcement'),
+        title: Text(Messages.announcement),
         content: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -37,9 +38,9 @@ class _AnnouncementDialogState extends State<AnnouncementDialog> {
                           });
                         }
                       }),
-                  const Flexible(
+                  Flexible(
                       child: Text(
-                    'Do not show this again',
+                    Messages.doNotShowThisAgain,
                     softWrap: true,
                   )),
                 ],
@@ -54,7 +55,7 @@ class _AnnouncementDialogState extends State<AnnouncementDialog> {
                 Navigator.of(context).pop();
               },
               icon: const Icon(Icons.check),
-              label: const Text('OK'))
+              label: Text(Messages.ok))
         ]);
   }
 }

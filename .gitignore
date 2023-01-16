@@ -45,3 +45,6 @@ app.*.map.json
 
 # Generated codes
 lib/**/*.g.dart
+
+# Generated locale files
+lib/i18n/messages_*.dart

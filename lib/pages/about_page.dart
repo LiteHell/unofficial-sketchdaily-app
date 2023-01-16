@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sketchdaily/i18n/messages.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutPage extends StatelessWidget {
@@ -7,32 +8,32 @@ class AboutPage extends StatelessWidget {
   List<Widget> listItems() {
     const header = TextStyle(fontWeight: FontWeight.bold);
     return [
-      const ListTile(title: Text('About Sketchdaily reference', style: header)),
+      ListTile(title: Text(Messages.aboutSketchDailyReference, style: header)),
       ListTile(
-        title: const Text('Author'),
+        title: Text(Messages.author),
         subtitle: const Text('Artomizer 〈artomizer@sketchdaily.net〉'),
         onTap: () {
           launchUrl(Uri.parse('mailto:artomizer@sketchdaily.net'));
         },
       ),
       ListTile(
-        title: const Text('Website'),
+        title: Text(Messages.website),
         subtitle: const Text('http://reference.sketchdaily.net/'),
         onTap: () {
           launchUrl(Uri.http('reference.sketchdaily.net'),
               mode: LaunchMode.externalApplication);
         },
       ),
-      const ListTile(title: Text('About application', style: header)),
+      ListTile(title: Text(Messages.aboutApplication, style: header)),
       ListTile(
-        title: const Text('Author'),
+        title: Text(Messages.author),
         subtitle: const Text('LiteHell 〈litehell@litehell.info〉'),
         onTap: () {
           launchUrl(Uri.parse('mailto:litehell@litehell.info'));
         },
       ),
       ListTile(
-        title: const Text('Repository'),
+        title: Text(Messages.githubRepository),
         subtitle: const Text(
             'https://github.com/litehell/unofficial-sketchdaily-app'),
         onTap: () {
@@ -42,9 +43,8 @@ class AboutPage extends StatelessWidget {
         },
       ),
       ListTile(
-        title: const Text('License'),
-        subtitle: const Text(
-            'GNU General Public License version 3, or (at your option) any later version'),
+        title: Text(Messages.appLicense),
+        subtitle: Text(Messages.gplNotice),
         onTap: () {
           launchUrl(Uri.https('www.gnu.org', '/licenses/gpl-3.0.html'));
         },
@@ -57,7 +57,7 @@ class AboutPage extends StatelessWidget {
     final items = listItems();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('About')),
+      appBar: AppBar(title: Text(Messages.about)),
       body: ListView.separated(
           itemBuilder: ((context, index) => items[index]),
           separatorBuilder: (context, index) => const Divider(),

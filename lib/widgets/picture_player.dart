@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/file.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:sketchdaily/i18n/messages.dart';
 import 'package:sketchdaily/sketchdaily_api/sketchdaily_image.dart';
 import 'package:sketchdaily/widgets/get_cached_image.dart';
 
@@ -164,23 +165,23 @@ class _PicturePlayerState extends State<PicturePlayer> {
           !stopped &&
           !loadingImage) {
         setState(() {
-          elapsedTimerString = 'Requesting next image...';
+          elapsedTimerString = Messages.requestingNextImage;
         });
         await goNext();
       } else {
         if (currentCachedFile == null || loadingImage) {
           setState(() {
-            elapsedTimerString = 'Downloading image...';
+            elapsedTimerString = Messages.downloadingImage;
           });
         } else if (widget.infiniteDuration) {
           if (widget.displayElapsedTimeOnInfinity) {
             setState(() {
-              elapsedTimerString =
-                  '${formatDuration(stopwatch.elapsed)} (Infinite)';
+              elapsedTimerString = Messages.elapsedTimeInInfinityTimer(
+                  formatDuration(stopwatch.elapsed));
             });
           } else {
             setState(() {
-              elapsedTimerString = 'Infinite';
+              elapsedTimerString = Messages.infinityTimer;
             });
           }
         } else {
@@ -226,7 +227,7 @@ class _PicturePlayerState extends State<PicturePlayer> {
             flex: 1,
             child: index < 0
                 ? (noMoreImages
-                    ? const Center(child: Text('no more images'))
+                    ? Center(child: Text(Messages.noMoreImages))
                     : const Center(child: CircularProgressIndicator()))
                 : cacheImageWidget()),
         Row(
@@ -234,17 +235,25 @@ class _PicturePlayerState extends State<PicturePlayer> {
           children: [
             IconButton(
                 onPressed: goFirst,
+                tooltip: Messages.goFirst,
                 icon: const Icon(Icons.keyboard_double_arrow_left)),
-            IconButton(onPressed: goPrev, icon: const Icon(Icons.chevron_left)),
+            IconButton(
+                onPressed: goPrev,
+                tooltip: Messages.goPrev,
+                icon: const Icon(Icons.chevron_left)),
             IconButton(
                 onPressed: toggleStopwatch,
+                tooltip: stopped ? Messages.resume : Messages.pause,
                 icon: stopped
                     ? const Icon(Icons.play_arrow)
                     : const Icon(Icons.pause)),
             IconButton(
-                onPressed: goNext, icon: const Icon(Icons.chevron_right)),
+                onPressed: goNext,
+                tooltip: Messages.goNext,
+                icon: const Icon(Icons.chevron_right)),
             IconButton(
                 onPressed: goLast,
+                tooltip: Messages.goLast,
                 icon: const Icon(Icons.keyboard_double_arrow_right)),
           ],
         )

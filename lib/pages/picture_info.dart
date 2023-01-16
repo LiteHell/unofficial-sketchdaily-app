@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sketchdaily/extensions/whitespace_first_letter_upper_case_extension.dart';
+import 'package:sketchdaily/enum_i18n.dart';
+import 'package:sketchdaily/i18n/messages.dart';
 import 'package:sketchdaily/sketchdaily_api/body_part/body_part.dart';
 import 'package:sketchdaily/sketchdaily_api/full_body/full_body_option.dart';
 import 'package:sketchdaily/sketchdaily_api/sketchdaily_api.dart';
@@ -20,61 +21,56 @@ class PictureInfo extends StatelessWidget {
     if (image is Animal) {
       AnimalOption option = (image as Animal).classification;
       return {
-        "Category": option.category?.name.toWhitespaceFirstLetterUpperCase() ??
-            'Unknown',
-        "Species": option.species?.name.toWhitespaceFirstLetterUpperCase() ??
-            'Unknown',
-        "View angle":
-            option.viewAngle?.name.toWhitespaceFirstLetterUpperCase() ??
-                'Unknown',
+        Messages.animalCategory:
+            enumI18n(option.category, valueWhenNull: Messages.unknown),
+        Messages.animalSpecies:
+            enumI18n(option.species, valueWhenNull: Messages.unknown),
+        Messages.viewAngle:
+            enumI18n(option.viewAngle, valueWhenNull: Messages.unknown),
       };
     } else if (image is FullBody) {
       FullBodyOption option = (image as FullBody).classification;
       return {
-        "Clothing": option.clothing == null
-            ? 'Unknown'
+        Messages.clothing: option.clothing == null
+            ? Messages.unknown
             : option.clothing!
-                ? 'Clothed'
-                : 'Nude',
-        "NSFW": option.nsfw == null
-            ? 'Unknown'
+                ? Messages.clothed
+                : Messages.nude,
+        Messages.poseType: option.nsfw == null
+            ? Messages.unknown
             : option.nsfw!
-                ? 'Yes'
-                : 'No',
-        "Pose type": option.poseType?.name.toWhitespaceFirstLetterUpperCase() ??
-            'Unknown',
-        "Gender":
-            option.gender?.name.toWhitespaceFirstLetterUpperCase() ?? 'Unknown',
-        "View angle":
-            option.viewAngle?.name.toWhitespaceFirstLetterUpperCase() ??
-                'Unknown',
+                ? Messages.yes
+                : Messages.no,
+        Messages.poseType:
+            enumI18n(option.poseType, valueWhenNull: Messages.unknown),
+        Messages.gender:
+            enumI18n(option.gender, valueWhenNull: Messages.unknown),
+        Messages.viewAngle:
+            enumI18n(option.viewAngle, valueWhenNull: Messages.unknown),
       };
     } else if (image is BodyPart) {
       BodyPartOption option = (image as BodyPart).classification;
       return {
-        "Body part": option.bodyPart?.name.toWhitespaceFirstLetterUpperCase() ??
-            'Unknown',
-        "Gender":
-            option.gender?.name.toWhitespaceFirstLetterUpperCase() ?? 'Unknown',
-        "View angle":
-            option.viewAngle?.name.toWhitespaceFirstLetterUpperCase() ??
-                'Unknown',
+        Messages.bodyPart:
+            enumI18n(option.bodyPart, valueWhenNull: Messages.unknown),
+        Messages.gender:
+            enumI18n(option.gender, valueWhenNull: Messages.unknown),
+        Messages.viewAngle:
+            enumI18n(option.viewAngle, valueWhenNull: Messages.unknown),
       };
     } else if (image is Vegetation) {
       VegetationOption option = (image as Vegetation).classification;
       return {
-        "Type":
-            option.type?.name.toWhitespaceFirstLetterUpperCase() ?? 'Unknown',
-        "Photo type":
-            option.photoType?.name.toWhitespaceFirstLetterUpperCase() ??
-                'Unknown',
+        Messages.vegetationType:
+            enumI18n(option.type, valueWhenNull: Messages.unknown),
+        Messages.vegetationPhotoType:
+            enumI18n(option.photoType, valueWhenNull: Messages.unknown),
       };
     } else if (image is Structure) {
       final type = (image as Structure).classification.type;
 
       return {
-        "Structure type":
-            type?.name.toWhitespaceFirstLetterUpperCase() ?? 'Unknown'
+        Messages.structureType: enumI18n(type, valueWhenNull: Messages.unknown),
       };
     }
 
@@ -99,8 +95,10 @@ class PictureInfo extends StatelessWidget {
   }
 
   Iterable<Widget> _personToSettingsMenuItem(Person person) {
-    return _mapDataToSettingsMenuItem(
-        {"Name": person.name, "Webpage": person.webpage});
+    return _mapDataToSettingsMenuItem({
+      Messages.personName: person.name,
+      Messages.personWebpage: person.webpage
+    });
   }
 
   Widget _header(String text) {
@@ -112,20 +110,20 @@ class PictureInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = <Widget>[
-      _header('Image classification'),
+      _header(Messages.imageClassification),
       ..._mapDataToSettingsMenuItem(_getClassificationInfo()),
-      _header('Image id and upload information'),
+      _header(Messages.imageIdAndUploadInformation),
       ..._mapDataToSettingsMenuItem({
-        "Image id": image.id,
-        "Uploaded by": image.uploader,
-        "Uploaded at": image.uploadedAt.toString(),
-        "Terms Of Use": image.termsOfUse ?? '(Empty)',
-        "Source Url": image.sourceUri?.toString() ?? ''
+        Messages.imageId: image.id,
+        Messages.uploadedBy: image.uploader,
+        Messages.uploadedAt: image.uploadedAt.toString(),
+        Messages.termsOfUse: image.termsOfUse ?? Messages.empty,
+        Messages.imageSourceUrl: image.sourceUri?.toString() ?? Messages.empty
       })
     ];
 
     if (image.photographer != null) {
-      items.add(_header('Photographer'));
+      items.add(_header(Messages.photographer));
       items.addAll(_personToSettingsMenuItem(image.photographer!));
     }
 
@@ -138,12 +136,13 @@ class PictureInfo extends StatelessWidget {
       }
 
       if (model != null) {
-        items.addAll([_header('Model'), ..._personToSettingsMenuItem(model)]);
+        items.addAll(
+            [_header(Messages.model), ..._personToSettingsMenuItem(model)]);
       }
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Information')),
+      appBar: AppBar(title: Text(Messages.pictureInformation)),
       body: _listItemsToListView(items.toList()),
     );
   }

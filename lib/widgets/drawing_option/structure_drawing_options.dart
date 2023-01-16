@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sketchdaily/enum_i18n.dart';
+import 'package:sketchdaily/i18n/messages.dart';
 import 'package:sketchdaily/sketchdaily_api/structure/structure_option.dart';
 import 'package:sketchdaily/widgets/buttons/choice_chips.dart';
 
@@ -15,14 +17,10 @@ class StructureDrawingOptions extends StatelessWidget {
         onChanged: (newStructureType) {
           onChanged(StructureOption(newStructureType));
         },
-        values: const [
-          ChoiceChipValueDescription(value: null, description: "All"),
-          ChoiceChipValueDescription(
-              value: StructureType.building, description: "Building"),
-          ChoiceChipValueDescription(
-              value: StructureType.house, description: "House"),
-          ChoiceChipValueDescription(
-              value: StructureType.other, description: "Other"),
+        values: [
+          ChoiceChipValueDescription(value: null, description: Messages.all),
+          ...StructureType.values.map((i) =>
+              ChoiceChipValueDescription(value: i, description: enumI18n(i))),
         ]);
   }
 
@@ -31,7 +29,7 @@ class StructureDrawingOptions extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Type'),
+        Text(Messages.structureType),
         _structureTypeChips(),
       ],
     );

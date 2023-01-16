@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sketchdaily/enum_i18n.dart';
+import 'package:sketchdaily/i18n/messages.dart';
 import 'package:sketchdaily/sketchdaily_api/sketchdaily_api.dart';
 import 'package:sketchdaily/widgets/buttons/choice_chips.dart';
 import 'package:sketchdaily/widgets/buttons/view_angle_button.dart';
@@ -11,28 +13,12 @@ class AnimalDrawingOptions extends StatelessWidget {
 
   Widget _animalSpeicesDropdown() {
     return DropdownButton<AnimalSpecies?>(
-        items: const [
-          DropdownMenuItem(value: null, child: Text('All')),
-          DropdownMenuItem(
-            value: AnimalSpecies.bird,
-            child: Text('Bird'),
-          ),
-          DropdownMenuItem(
-            value: AnimalSpecies.bug,
-            child: Text('Bug'),
-          ),
-          DropdownMenuItem(
-            value: AnimalSpecies.fish,
-            child: Text('Fish'),
-          ),
-          DropdownMenuItem(
-            value: AnimalSpecies.mammal,
-            child: Text('Mammal'),
-          ),
-          DropdownMenuItem(
-            value: AnimalSpecies.reptileOrAmphibian,
-            child: Text('Reptile or Amphibian'),
-          )
+        items: [
+          DropdownMenuItem(value: null, child: Text(Messages.all)),
+          ...AnimalSpecies.values.map((e) => DropdownMenuItem(
+                value: e,
+                child: Text(enumI18n(e)),
+              )),
         ],
         value: options.species,
         onChanged: (newSpecies) {
@@ -54,13 +40,10 @@ class AnimalDrawingOptions extends StatelessWidget {
                 viewAngle: options.viewAngle));
           }
         },
-        values: const [
-          ChoiceChipValueDescription<AnimalCategory>(
-              value: null, description: 'All'),
-          ChoiceChipValueDescription<AnimalCategory>(
-              value: AnimalCategory.living, description: 'Living'),
-          ChoiceChipValueDescription<AnimalCategory>(
-              value: AnimalCategory.skeletonOrBones, description: 'Dead'),
+        values: <ChoiceChipValueDescription<AnimalCategory>>[
+          ChoiceChipValueDescription(value: null, description: Messages.all),
+          ...AnimalCategory.values.map((e) =>
+              ChoiceChipValueDescription(value: e, description: enumI18n(e))),
         ]);
   }
 
@@ -69,11 +52,11 @@ class AnimalDrawingOptions extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Species'),
+        Text(Messages.animalSpecies),
         _animalSpeicesDropdown(),
-        const Text('Category'),
+        Text(Messages.animalCategory),
         _animalCategoryChips(),
-        const Text('View Angle'),
+        Text(Messages.viewAngle),
         ViewAngleButton(
             value: options.viewAngle,
             onChanged: (newViewAngle) {

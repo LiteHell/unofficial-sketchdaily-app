@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sketchdaily/i18n/messages.dart';
 import 'package:sketchdaily/pages/drawing_options.dart';
 import 'package:sketchdaily/widgets/announcements.dart';
 import 'package:sketchdaily/widgets/customized_popup_menu.dart';
@@ -10,7 +11,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SketchDaily reference'),
+        title: Text(Messages.sketchDailyReference),
         actions: const [CustomizedPopupMenu()],
       ),
       body: Column(children: [
@@ -19,7 +20,7 @@ class MainPage extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           child: ElevatedButton.icon(
               icon: const Icon(Icons.palette),
-              label: const Text('Start Drawing!'),
+              label: Text(Messages.startDrawing),
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => const DrawingOptions()));

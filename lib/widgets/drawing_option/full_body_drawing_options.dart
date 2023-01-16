@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sketchdaily/enum_i18n.dart';
+import 'package:sketchdaily/i18n/messages.dart';
 import 'package:sketchdaily/sketchdaily_api/full_body/full_body_option.dart';
 import 'package:sketchdaily/widgets/buttons/choice_chips.dart';
 import 'package:sketchdaily/widgets/buttons/gender_button.dart';
@@ -21,12 +23,10 @@ class FullBodyDrawingOptions extends StatelessWidget {
               poseType: newPoseType,
               viewAngle: options.viewAngle));
         },
-        values: const [
-          ChoiceChipValueDescription(value: null, description: 'All'),
-          ChoiceChipValueDescription(
-              value: PoseType.action, description: 'Action'),
-          ChoiceChipValueDescription(
-              value: PoseType.stationary, description: 'Stationary'),
+        values: [
+          ChoiceChipValueDescription(value: null, description: Messages.all),
+          ...PoseType.values.map((i) =>
+              ChoiceChipValueDescription(value: i, description: enumI18n(i))),
         ]);
   }
 
@@ -54,10 +54,11 @@ class FullBodyDrawingOptions extends StatelessWidget {
               poseType: options.poseType,
               viewAngle: options.viewAngle));
         },
-        values: const [
-          ChoiceChipValueDescription(value: null, description: 'All'),
-          ChoiceChipValueDescription(value: true, description: 'Clothed'),
-          ChoiceChipValueDescription(value: false, description: 'Nude'),
+        values: [
+          ChoiceChipValueDescription(value: null, description: Messages.all),
+          ChoiceChipValueDescription(
+              value: true, description: Messages.clothed),
+          ChoiceChipValueDescription(value: false, description: Messages.nude),
         ]);
   }
 
@@ -74,7 +75,7 @@ class FullBodyDrawingOptions extends StatelessWidget {
                   poseType: options.poseType,
                   viewAngle: options.viewAngle));
             }),
-        const Text('Include NSWF images')
+        Text(Messages.includeNSFWImages)
       ],
     );
   }
@@ -85,14 +86,14 @@ class FullBodyDrawingOptions extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Clothing and NSFW'),
+        Text(Messages.clothingAndNSFW),
         _clothingChips(),
         if (showNSFWCheckbox) _nsfwCheckbox(),
-        const Text('Gender'),
+        Text(Messages.gender),
         _genderChips(),
-        const Text('Pose type'),
+        Text(Messages.poseType),
         _poseTypeChips(),
-        const Text('ViewAngle'),
+        Text(Messages.viewAngle),
         ViewAngleButton(
             value: options.viewAngle,
             onChanged: (newViewAngle) {
