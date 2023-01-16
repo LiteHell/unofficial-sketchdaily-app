@@ -15,10 +15,11 @@ class Structure extends SketchDailyImage<StructureOption> {
       required super.uploader,
       required super.id});
 
-  static Future<int> count(StructureType? structureType,
+  static Future<int> count(StructureOption structureOption,
       {bool recentImagesOnly = false}) async {
     Map<String, String> parameters = {};
 
+    StructureType? structureType = structureOption.type;
     if (structureType != null) {
       parameters['StructureType'] = structureType.name.toFirstLetterUpperCase();
     }
