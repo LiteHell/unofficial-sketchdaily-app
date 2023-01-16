@@ -16,7 +16,9 @@ class Animal extends SketchDailyImage<AnimalOption> {
       required super.photographer,
       required super.uploadedAt,
       required super.uploader,
-      required super.classification});
+      required super.classification,
+      required super.sourceUri,
+      required super.termsOfUse});
 
   static AnimalOption createClassification(dynamic object) {
     return AnimalOption(
@@ -75,6 +77,12 @@ class Animal extends SketchDailyImage<AnimalOption> {
         uploadedAt: DateTime.parse(response['uploadDate']),
         filePath: response['file'],
         id: response['id'],
-        classification: createClassification(response['classifications']));
+        classification: createClassification(response['classifications']),
+        sourceUri: response['sourceUrl'] != null
+            ? (response['sourceUrl'] as String).isNotEmpty
+                ? Uri.parse(response['sourceUrl'])
+                : null
+            : null,
+        termsOfUse: response['termsOfUse']);
   }
 }

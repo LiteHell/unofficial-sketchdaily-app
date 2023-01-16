@@ -13,7 +13,9 @@ class Vegetation extends SketchDailyImage<VegetationOption> {
       required super.uploadedAt,
       required super.uploader,
       required super.photographer,
-      required super.classification});
+      required super.classification,
+      required super.sourceUri,
+      required super.termsOfUse});
 
   static Map<String, String> createParameters(VegetationOption option) {
     Map<String, String> parameters = {};
@@ -63,6 +65,12 @@ class Vegetation extends SketchDailyImage<VegetationOption> {
         id: response['id'],
         uploadedAt: DateTime.parse(response['uploadDate']),
         uploader: response['uploadedBy'],
-        photographer: photographer);
+        photographer: photographer,
+        sourceUri: response['sourceUrl'] != null
+            ? (response['sourceUrl'] as String).isNotEmpty
+                ? Uri.parse(response['sourceUrl'])
+                : null
+            : null,
+        termsOfUse: response['termsOfUse']);
   }
 }

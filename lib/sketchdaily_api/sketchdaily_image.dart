@@ -7,6 +7,8 @@ class SketchDailyImage<T extends PictureOption> {
   final DateTime uploadedAt;
   final String uploader;
   final Person? photographer;
+  final String? termsOfUse;
+  final Uri? sourceUri;
   final T classification;
   Uri get uri => Uri.http('reference.sketchdaily.net:4000', filePath);
 
@@ -16,5 +18,7 @@ class SketchDailyImage<T extends PictureOption> {
       required this.uploadedAt,
       required this.uploader,
       required this.photographer,
-      required this.classification});
+      required this.classification,
+      required this.termsOfUse,
+      required this.sourceUri});
 }

@@ -20,7 +20,9 @@ class BodyPart extends SketchDailyImage<BodyPartOption> {
       required super.uploadedAt,
       required super.uploader,
       required this.model,
-      required super.classification});
+      required super.classification,
+      required super.sourceUri,
+      required super.termsOfUse});
 
   static BodyPartOption createClassification(dynamic object) {
     return BodyPartOption(
@@ -82,6 +84,12 @@ class BodyPart extends SketchDailyImage<BodyPartOption> {
         uploadedAt: DateTime.parse(response['uploadDate']),
         filePath: response['file'],
         id: response['id'],
-        classification: createClassification(response['classifications']));
+        classification: createClassification(response['classifications']),
+        sourceUri: response['sourceUrl'] != null
+            ? (response['sourceUrl'] as String).isNotEmpty
+                ? Uri.parse(response['sourceUrl'])
+                : null
+            : null,
+        termsOfUse: response['termsOfUse']);
   }
 }

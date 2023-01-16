@@ -119,6 +119,8 @@ class PictureInfo extends StatelessWidget {
         "Image id": image.id,
         "Uploaded by": image.uploader,
         "Uploaded at": image.uploadedAt.toString(),
+        "Terms Of Use": image.termsOfUse ?? '(Empty)',
+        "Source Url": image.sourceUri?.toString() ?? ''
       })
     ];
 

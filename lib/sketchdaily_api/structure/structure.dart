@@ -13,7 +13,9 @@ class Structure extends SketchDailyImage<StructureOption> {
       required super.classification,
       required super.uploadedAt,
       required super.uploader,
-      required super.id});
+      required super.id,
+      required super.sourceUri,
+      required super.termsOfUse});
 
   static Future<int> count(StructureOption structureOption,
       {bool recentImagesOnly = false}) async {
@@ -55,6 +57,12 @@ class Structure extends SketchDailyImage<StructureOption> {
                 .toString()
                 .toLowerCase())),
         uploadedAt: DateTime.parse(response['uploadDate']),
-        uploader: response['uploadedBy']);
+        uploader: response['uploadedBy'],
+        sourceUri: response['sourceUrl'] != null
+            ? (response['sourceUrl'] as String).isNotEmpty
+                ? Uri.parse(response['sourceUrl'])
+                : null
+            : null,
+        termsOfUse: response['termsOfUse']);
   }
 }

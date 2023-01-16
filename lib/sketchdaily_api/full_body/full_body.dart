@@ -20,7 +20,9 @@ class FullBody extends SketchDailyImage<FullBodyOption> {
       required super.uploadedAt,
       required super.uploader,
       required this.model,
-      required super.classification});
+      required super.classification,
+      required super.sourceUri,
+      required super.termsOfUse});
 
   static FullBodyOption createClassification(dynamic object,
       {required bool? nsfw}) {
@@ -92,6 +94,12 @@ class FullBody extends SketchDailyImage<FullBodyOption> {
         filePath: response['file'],
         id: response['id'],
         classification: createClassification(response['classifications'],
-            nsfw: option.nsfw));
+            nsfw: option.nsfw),
+        sourceUri: response['sourceUrl'] != null
+            ? (response['sourceUrl'] as String).isNotEmpty
+                ? Uri.parse(response['sourceUrl'])
+                : null
+            : null,
+        termsOfUse: response['termsOfUse']);
   }
 }
