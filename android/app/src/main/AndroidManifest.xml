@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sketchdaily">
+    package="info.litehell.sketchdaily">
    <application
         android:label="sketchdaily"
         android:name="${applicationName}"
