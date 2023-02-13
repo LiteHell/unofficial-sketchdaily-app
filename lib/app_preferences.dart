@@ -78,7 +78,7 @@ class AppPreferences {
   }
 
   static Future<int?> readDrawingTimeOptionOf(int idx,
-      [int? defaultTime = 5]) async {
+      [int? defaultTime = 30]) async {
     final prefs = await SharedPreferences.getInstance();
     final key = 'drawing-options-time-$idx';
     final saved = prefs.getInt(key);
