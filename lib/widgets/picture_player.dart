@@ -225,11 +225,19 @@ class _PicturePlayerState extends State<PicturePlayer> {
         ]),
         Flexible(
             flex: 1,
-            child: index < 0
-                ? (noMoreImages
-                    ? Center(child: Text(Messages.noMoreImages))
-                    : const Center(child: CircularProgressIndicator()))
-                : cacheImageWidget()),
+            child: GestureDetector(
+                onHorizontalDragEnd: (details) {
+                  if ((details.primaryVelocity ?? 0) > 0) {
+                    goPrev();
+                  } else if ((details.primaryVelocity ?? 0) < 0) {
+                    goNext();
+                  }
+                },
+                child: (index < 0
+                    ? (noMoreImages
+                        ? Center(child: Text(Messages.noMoreImages))
+                        : const Center(child: CircularProgressIndicator()))
+                    : cacheImageWidget()))),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
