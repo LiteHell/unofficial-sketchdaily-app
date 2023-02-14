@@ -358,6 +358,18 @@
     "type": "text",
     "placeholders": {}
   },
+  "fossLicense": "오픈 소스 라이선스",
+  "@fossLicense": {
+    "description": "Open source library licenses used in this app",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fossLicenseSubtitle": "오픈 소스 라이브러리 라이선스를 보시려면 터치하세요",
+  "@fossLicenseSubtitle": {
+    "description": "subtitle of fossLicense",
+    "type": "text",
+    "placeholders": {}
+  },
   "referenceOptionsTitle": "레퍼런스 사진 옵션",
   "@referenceOptionsTitle": {
     "description": "Reference options page title",

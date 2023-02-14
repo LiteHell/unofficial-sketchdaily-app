@@ -358,6 +358,18 @@
     "type": "text",
     "placeholders": {}
   },
+  "fossLicense": "Open source licenses",
+  "@fossLicense": {
+    "description": "Open source library licenses used in this app",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fossLicenseSubtitle": "Tap to see open source licenses",
+  "@fossLicenseSubtitle": {
+    "description": "subtitle of fossLicense",
+    "type": "text",
+    "placeholders": {}
+  },
   "referenceOptionsTitle": "Reference options",
   "@referenceOptionsTitle": {
     "description": "Reference options page title",

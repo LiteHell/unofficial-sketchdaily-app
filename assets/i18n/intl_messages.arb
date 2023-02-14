@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2023-02-14T17:29:08.167046",
+  "@@last_modified": "2023-02-14T20:29:36.464903",
   "all": "All",
   "@all": {
     "description": "All, usually used in reference options",
@@ -355,6 +355,18 @@
   "gplNotice": "GNU General Public License version 3, or (at your option) any later version",
   "@gplNotice": {
     "description": "GPLv3+ License notice of this application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fossLicense": "Open source licenses",
+  "@fossLicense": {
+    "description": "Open source library licenses used in this app",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fossLicenseSubtitle": "Tap to see open source licenses",
+  "@fossLicenseSubtitle": {
+    "description": "subtitle of fossLicense",
     "type": "text",
     "placeholders": {}
   },
