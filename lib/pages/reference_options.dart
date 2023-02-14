@@ -60,6 +60,42 @@ class _ReferenceOptionsState extends State<ReferenceOptions> {
     }
   }
 
+  Future<void> getSpecificImageCount(int tabIndex) async {
+    if (mounted) {
+      setState(() {
+        _imageCounts[tabIndex] = null;
+      });
+    }
+
+    int newCount;
+    switch (tabIndex) {
+      case 0:
+        newCount = await FullBody.count(options.fullBody);
+        break;
+      case 1:
+        newCount = await BodyPart.count(options.bodyPart);
+        break;
+      case 2:
+        newCount = await Animal.count(options.animal);
+        break;
+      case 3:
+        newCount = await Structure.count(options.structure);
+        break;
+      case 4:
+        newCount = await Vegetation.count(options.vegetation);
+        break;
+      default:
+        throw Exception(
+            'reference_options tabIndex out of range in getSpecificImageCount func (index $tabIndex)');
+    }
+
+    if (mounted) {
+      setState(() {
+        _imageCounts[tabIndex] = newCount;
+      });
+    }
+  }
+
   void attachTextControllerListener() {
     for (var i = 0; i < 5; i++) {
       _controllers[i].addListener(() {
@@ -167,15 +203,14 @@ class _ReferenceOptionsState extends State<ReferenceOptions> {
         optionsWidget: AnimalDrawingOptions(
           options: options.animal,
           onChanged: (e) async {
-            final newCount = await Animal.count(e);
-
             if (mounted) {
               setState(() {
                 options.animal = e;
-                _imageCounts[tabIndex] = newCount;
                 saveOptionsToPreferences();
               });
             }
+
+            await getSpecificImageCount(tabIndex);
           },
         ),
         onStartPreseed: () {
@@ -189,15 +224,14 @@ class _ReferenceOptionsState extends State<ReferenceOptions> {
         optionsWidget: FullBodyDrawingOptions(
           options: options.fullBody,
           onChanged: (e) async {
-            final newCount = await FullBody.count(e);
-
             if (mounted) {
               setState(() {
                 options.fullBody = e;
-                _imageCounts[tabIndex] = newCount;
                 saveOptionsToPreferences();
               });
             }
+
+            await getSpecificImageCount(tabIndex);
           },
         ),
         onStartPreseed: () {
@@ -211,15 +245,14 @@ class _ReferenceOptionsState extends State<ReferenceOptions> {
         optionsWidget: BodyPartDrawingOptions(
           options: options.bodyPart,
           onChanged: (e) async {
-            final newCount = await BodyPart.count(e);
-
             if (mounted) {
               setState(() {
                 options.bodyPart = e;
-                _imageCounts[tabIndex] = newCount;
                 saveOptionsToPreferences();
               });
             }
+
+            await getSpecificImageCount(tabIndex);
           },
         ),
         onStartPreseed: () {
@@ -233,15 +266,14 @@ class _ReferenceOptionsState extends State<ReferenceOptions> {
         optionsWidget: VegetationDrawingOptions(
           options: options.vegetation,
           onChanged: (e) async {
-            final newCount = await Vegetation.count(e);
-
             if (mounted) {
               setState(() {
                 options.vegetation = e;
-                _imageCounts[tabIndex] = newCount;
                 saveOptionsToPreferences();
               });
             }
+
+            await getSpecificImageCount(tabIndex);
           },
         ),
         onStartPreseed: () {
@@ -255,15 +287,14 @@ class _ReferenceOptionsState extends State<ReferenceOptions> {
         optionsWidget: StructureDrawingOptions(
           options: options.structure,
           onChanged: (e) async {
-            final newCount = await Structure.count(e);
-
             if (mounted) {
               setState(() {
                 options.structure = e;
-                _imageCounts[tabIndex] = newCount;
                 saveOptionsToPreferences();
               });
             }
+
+            await getSpecificImageCount(tabIndex);
           },
         ),
         onStartPreseed: () {
