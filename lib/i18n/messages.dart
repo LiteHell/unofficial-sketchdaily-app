@@ -153,6 +153,10 @@ class Messages {
       args: [],
       desc:
           'Text of menu item to display information of current image of the player');
+  static String get shareImage => Intl.message('Share this image',
+      name: 'shareImage',
+      args: [],
+      desc: 'Text of menu item to share current image of the player');
 
   // * Error message
   static String get noMoreImages => Intl.message('No more images',

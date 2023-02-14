@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:sketchdaily/app_preferences.dart';
 import 'package:sketchdaily/i18n/messages.dart';
 import 'package:sketchdaily/pages/picture_info.dart';
@@ -15,6 +16,7 @@ import 'package:sketchdaily/sketchdaily_api/structure/structure.dart';
 import 'package:sketchdaily/sketchdaily_api/structure/structure_option.dart';
 import 'package:sketchdaily/sketchdaily_api/vegetation/vegetation.dart';
 import 'package:sketchdaily/sketchdaily_api/vegetation/vegetation_option.dart';
+import 'package:sketchdaily/widgets/get_cached_image.dart';
 import 'package:sketchdaily/widgets/picture_player.dart';
 
 import '../sketchdaily_api/picture_options.dart';
@@ -138,6 +140,20 @@ class _PicturePageState extends State<PicturePage> {
               },
               icon: const Icon(Icons.info),
               tooltip: Messages.imageInformation,
+            ),
+            IconButton(
+              onPressed: () {
+                SketchDailyImage? image = currentImage;
+                if (image == null) return;
+
+                getCachedFile(
+                    url: image.uri.toString(),
+                    onCompleted: ((cacheKey, fileInfo) {
+                      Share.shareXFiles([XFile(fileInfo.file.path)]);
+                    }));
+              },
+              icon: const Icon(Icons.share),
+              tooltip: Messages.shareImage,
             )
           ],
         ),
