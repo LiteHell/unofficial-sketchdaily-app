@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2023-02-14T15:24:55.828835",
+  "@@last_modified": "2023-02-14T17:29:08.167046",
   "all": "All",
   "@all": {
     "description": "All, usually used in reference options",
@@ -241,6 +241,12 @@
   "imageInformation": "Image information",
   "@imageInformation": {
     "description": "Text of menu item to display information of current image of the player",
+    "type": "text",
+    "placeholders": {}
+  },
+  "shareImage": "Share this image",
+  "@shareImage": {
+    "description": "Text of menu item to share current image of the player",
     "type": "text",
     "placeholders": {}
   },

@@ -244,6 +244,12 @@
     "type": "text",
     "placeholders": {}
   },
+  "shareImage": "Share this image",
+  "@shareImage": {
+    "description": "Text of menu item to share current image of the player",
+    "type": "text",
+    "placeholders": {}
+  },
   "noMoreImages": "No more images",
   "@noMoreImages": {
     "description": "Error message when no more images are available with options given",

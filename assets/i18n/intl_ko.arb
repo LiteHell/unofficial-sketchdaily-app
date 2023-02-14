@@ -244,6 +244,12 @@
     "type": "text",
     "placeholders": {}
   },
+  "shareImage": "이미지 공유",
+  "@shareImage": {
+    "description": "Text of menu item to share current image of the player",
+    "type": "text",
+    "placeholders": {}
+  },
   "noMoreImages": "더 이상의 이미지가 없습니다",
   "@noMoreImages": {
     "description": "Error message when no more images are available with options given",
