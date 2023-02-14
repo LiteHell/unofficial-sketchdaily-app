@@ -238,6 +238,15 @@ class Messages {
       name: 'gplNotice',
       args: [],
       desc: 'GPLv3+ License notice of this application');
+  static String get fossLicense => Intl.message('Open source licenses',
+      name: 'fossLicense',
+      args: [],
+      desc: 'Open source library licenses used in this app');
+  static String get fossLicenseSubtitle =>
+      Intl.message('Tap to see open source licenses',
+          name: 'fossLicenseSubtitle',
+          args: [],
+          desc: 'subtitle of fossLicense');
 
   // Drawing options page
   static String get referenceOptionsTitle => Intl.message('Reference options',

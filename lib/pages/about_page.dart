@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
 
-  List<Widget> listItems() {
+  List<Widget> listItems(BuildContext context) {
     const header = TextStyle(fontWeight: FontWeight.bold);
     return [
       ListTile(title: Text(Messages.aboutSketchDailyReference, style: header)),
@@ -49,12 +49,20 @@ class AboutPage extends StatelessWidget {
           launchUrl(Uri.https('www.gnu.org', '/licenses/gpl-3.0.html'));
         },
       ),
+      ListTile(
+          title: Text(Messages.fossLicense),
+          subtitle: Text(Messages.fossLicenseSubtitle),
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: ((context) => LicensePage(
+                    applicationName: Messages.sketchDailyReference))));
+          })
     ];
   }
 
   @override
   Widget build(BuildContext context) {
-    final items = listItems();
+    final items = listItems(context);
 
     return Scaffold(
       appBar: AppBar(title: Text(Messages.about)),
