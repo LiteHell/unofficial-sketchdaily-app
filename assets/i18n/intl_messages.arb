@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2023-01-16T23:59:05.959227",
+  "@@last_modified": "2023-02-14T15:24:55.828835",
   "all": "All",
   "@all": {
     "description": "All, usually used in reference options",
@@ -223,6 +223,12 @@
   "pause": "Pause",
   "@pause": {
     "description": "Tooltip of icon button to resume Player",
+    "type": "text",
+    "placeholders": {}
+  },
+  "horizontalFlip": "Horizontally flip this image",
+  "@horizontalFlip": {
+    "description": "Tooltip of icon button to horizontally flip the image on player, like mirror.",
     "type": "text",
     "placeholders": {}
   },

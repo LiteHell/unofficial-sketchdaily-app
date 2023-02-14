@@ -136,6 +136,12 @@ class Messages {
       desc: 'Tooltip of icon button to resume player');
   static String get pause => Intl.message('Pause',
       name: 'pause', args: [], desc: 'Tooltip of icon button to resume Player');
+  static String get horizontalFlip => Intl.message(
+      'Horizontally flip this image',
+      name: 'horizontalFlip',
+      args: [],
+      desc:
+          'Tooltip of icon button to horizontally flip the image on player, like mirror.');
 
   // * Action menus
   static String get openReportImageButton => Intl.message('Report this image',

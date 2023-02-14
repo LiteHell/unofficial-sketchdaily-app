@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/file.dart';
@@ -37,6 +38,7 @@ class _PicturePlayerState extends State<PicturePlayer> {
   bool noMoreImages = false;
   String elapsedTimerString = '??:??';
   bool loadingImage = false;
+  bool imageMirrored = false;
   File? currentCachedFile;
 
   @override
@@ -203,18 +205,30 @@ class _PicturePlayerState extends State<PicturePlayer> {
 
   Widget cacheImageWidget() {
     final image = currentCachedFile;
-    return image != null
-        ? Image.file(
-            image,
-            fit: BoxFit.contain,
-          )
-        : const Center(
-            child: CircularProgressIndicator(),
-          );
+    if (image != null) {
+      final imageWidget = Image.file(
+        image,
+        fit: BoxFit.contain,
+      );
+      return imageMirrored
+          ? Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.rotationY(math.pi),
+              child: imageWidget)
+          : imageWidget;
+    } else {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    const iconButtonSize = 20.0;
+    const iconButtonPaddingSize = 8.0;
+    const iconButtonPadding = EdgeInsets.all(iconButtonPaddingSize);
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -243,27 +257,55 @@ class _PicturePlayerState extends State<PicturePlayer> {
           children: [
             IconButton(
                 onPressed: goFirst,
+                iconSize: iconButtonSize,
+                padding: iconButtonPadding,
                 tooltip: Messages.goFirst,
-                icon: const Icon(Icons.keyboard_double_arrow_left)),
+                icon: const Icon(
+                  Icons.keyboard_double_arrow_left,
+                )),
             IconButton(
                 onPressed: goPrev,
+                iconSize: iconButtonSize,
+                padding: iconButtonPadding,
                 tooltip: Messages.goPrev,
                 icon: const Icon(Icons.chevron_left)),
             IconButton(
                 onPressed: toggleStopwatch,
+                iconSize: iconButtonSize,
+                padding: iconButtonPadding,
                 tooltip: stopped ? Messages.resume : Messages.pause,
                 icon: stopped
                     ? const Icon(Icons.play_arrow)
                     : const Icon(Icons.pause)),
             IconButton(
                 onPressed: goNext,
+                iconSize: iconButtonSize,
+                padding: iconButtonPadding,
                 tooltip: Messages.goNext,
                 icon: const Icon(Icons.chevron_right)),
             IconButton(
                 onPressed: goLast,
+                iconSize: iconButtonSize,
+                padding: iconButtonPadding,
                 tooltip: Messages.goLast,
                 icon: const Icon(Icons.keyboard_double_arrow_right)),
-          ],
+            IconButton(
+                onPressed: () {
+                  setState(() {
+                    imageMirrored = !imageMirrored;
+                  });
+                },
+                iconSize: iconButtonSize,
+                padding: iconButtonPadding,
+                tooltip: Messages.horizontalFlip,
+                icon: const Icon(Icons.flip))
+          ]
+              .map((i) => SizedBox(
+                    width: iconButtonSize + iconButtonPaddingSize * 2,
+                    height: iconButtonSize + iconButtonPaddingSize * 2,
+                    child: i,
+                  ))
+              .toList(),
         )
       ],
     );

@@ -226,6 +226,12 @@
     "type": "text",
     "placeholders": {}
   },
+  "horizontalFlip": "좌우반전",
+  "@horizontalFlip": {
+    "description": "Tooltip of icon button to horizontally flip the image on player, like mirror.",
+    "type": "text",
+    "placeholders": {}
+  },
   "openReportImageButton": "이미지 신고",
   "@openReportImageButton": {
     "description": "Text of menu item to report a image displayed in the player",

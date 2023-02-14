@@ -226,6 +226,12 @@
     "type": "text",
     "placeholders": {}
   },
+  "horizontalFlip": "Horizontally flip this image",
+  "@horizontalFlip": {
+    "description": "Tooltip of icon button to horizontally flip the image on player, like mirror.",
+    "type": "text",
+    "placeholders": {}
+  },
   "openReportImageButton": "Report this image",
   "@openReportImageButton": {
     "description": "Text of menu item to report a image displayed in the player",
