@@ -56,7 +56,7 @@ class _PicturePlayerState extends State<PicturePlayer> {
   }
 
   String formatDuration(Duration duration) {
-    return '${duration.inMinutes.toString()}:${duration.inSeconds.toString().padLeft(2, '0')}';
+    return '${duration.inMinutes.toString()}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
   }
 
   Future<void> goNext() async {
